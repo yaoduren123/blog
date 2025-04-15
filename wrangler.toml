@@ -1,6 +1,6 @@
 name = "astro-blog"
 compatibility_date = "2025-4-15"
+main = "workers-site/index.js"
 
 [site]
 bucket = "./dist"
-main = "workers-site/index.js"
