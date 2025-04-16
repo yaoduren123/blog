@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./typography.css";
+@import "./fonts.css";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -27,7 +28,10 @@ html[data-theme="dark"] {
   --color-muted: var(--muted);
   --color-border: var(--border);
 }
-
+a {
+  text-decoration: none;
+  color: inherit;
+}
 @layer base {
   * {
     @apply border-border outline-accent/75;
@@ -44,6 +48,7 @@ html[data-theme="dark"] {
   button {
     @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
   }
+  
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
@@ -51,6 +56,24 @@ html[data-theme="dark"] {
   section,
   footer {
     @apply mx-auto max-w-3xl px-4;
+  }
+  .font-alibaba-puhuiti-thin {
+    font-family: 'AlibabaPuHuiTi-Thin';
+  }
+  .font-alibaba-puhuiti {
+    font-family: 'AlibabaPuHuiTi-Regular';
+  }
+  .font-alibaba-puhuiti-bold {
+    font-family: 'AlibabaPuHuiTi-Bold';
+  }
+  .font-alibaba-puhuiti-black {
+    font-family: 'AlibabaPuHuiTi-Black';
+  }
+  .font-alimama-agilevf {
+    font-family: 'AlimamaAgileVF-Thin';
+  }
+  .font-alimama-dongfangdakai {
+    font-family: 'AlimamaDongFangDaKai';
   }
 }
 

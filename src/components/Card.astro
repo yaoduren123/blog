@@ -21,7 +21,7 @@ const headerProps = {
 <li class="my-6">
   <a
     href={getPath(id, filePath)}
-    class="inline-block text-lg font-medium text-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
+    class="inline-block text-lg font-alibaba-puhuiti-bold text-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
   >
     {
       variant === "h2" ? (
@@ -32,5 +32,5 @@ const headerProps = {
     }
   </a>
   <Datetime {pubDatetime} {modDatetime} {timezone} />
-  <p>{description}</p>
+  <p class="font-alibaba-puhuiti-thin">{description}</p>
 </li>

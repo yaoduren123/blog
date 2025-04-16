@@ -6,7 +6,7 @@ import Footer from "@/components/Footer.astro";
 import Tag from "@/components/Tag.astro";
 import Datetime from "@/components/Datetime.astro";
 import EditPost from "@/components/EditPost.astro";
-import ShareLinks from "@/components/ShareLinks.astro";
+// import ShareLinks from "@/components/ShareLinks.astro";
 import BackButton from "@/components/BackButton.astro";
 import { getPath } from "@/utils/getPath";
 import { slugifyStr } from "@/utils/slugify";
@@ -93,15 +93,15 @@ const nextPost =
   >
     <h1
       transition:name={slugifyStr(title)}
-      class="inline-block text-2xl font-bold text-accent sm:text-3xl"
+      class="inline-block text-2xl font-alibaba-puhuiti-bold text-accent sm:text-3xl"
     >
       {title}
     </h1>
     <div class="flex items-center gap-4">
       <Datetime {pubDatetime} {modDatetime} {timezone} size="lg" class="my-2" />
-      <EditPost class="max-sm:hidden" {hideEditPost} {post} />
+      <!-- <EditPost class="max-sm:hidden" {hideEditPost} {post} /> -->
     </div>
-    <article id="article" class="mx-auto prose mt-8 max-w-3xl">
+    <article id="article" class="mx-auto prose mt-8 max-w-3xl font-alibaba-puhuiti">
       <Content />
     </article>
 
@@ -116,14 +116,14 @@ const nextPost =
     <div
       class="flex flex-col items-center justify-between gap-6 sm:flex-row sm:items-end sm:gap-4"
     >
-      <ShareLinks />
+      <!-- <ShareLinks /> -->
 
       <button
         id="back-to-top"
-        class="focus-outline py-1 whitespace-nowrap hover:opacity-75"
+        class="focus-outline font-alibaba-puhuiti py-1 whitespace-nowrap hover:opacity-75"
       >
         <IconChevronLeft class="inline-block rotate-90" />
-        <span>Back to Top</span>
+        <span>返回顶部</span>
       </button>
     </div>
 
@@ -139,8 +139,8 @@ const nextPost =
           >
             <IconChevronLeft class="inline-block flex-none" />
             <div>
-              <span>Previous Post</span>
-              <div class="text-sm text-accent/85">{prevPost.title}</div>
+              <span class="font-alimama-puhuiti">上一篇</span>
+              <div class="text-sm font-alimama-puhuiti text-accent/85">{prevPost.title}</div>
             </div>
           </a>
         )
@@ -152,8 +152,8 @@ const nextPost =
             class="flex w-full justify-end gap-1 text-right hover:opacity-75 sm:col-start-2"
           >
             <div>
-              <span>Next Post</span>
-              <div class="text-sm text-accent/85">{nextPost.title}</div>
+              <span>下一篇</span>
+              <div class="text-sm font-alimama-puhuiti text-accent/85">{nextPost.title}</div>
             </div>
             <IconChevronRight class="inline-block flex-none" />
           </a>
