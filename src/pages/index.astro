@@ -6,6 +6,7 @@ import Footer from "@/components/Footer.astro";
 // import Socials from "@/components/Socials.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import Card from "@/components/Card.astro";
+import Carousel from "@/components/Carousel.astro";
 import Hr from "@/components/Hr.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
@@ -16,7 +17,7 @@ const posts = await getCollection("blog");
 
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const recentPosts = sortedPosts.filter(() => true);
 ---
 
 <Layout>
@@ -61,11 +62,12 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         <>
           <section id="featured" class="pt-12 pb-6">
             <h2 class="text-2xl font-alibaba-puhuiti-bold tracking-wide">精选热门</h2>
-            <ul>
+            <Carousel posts={featuredPosts} interval={5000} showControls={featuredPosts.length > 1} showIndicators={featuredPosts.length > 1} />
+            {/* <ul>
               {featuredPosts.map(data => (
-                <Card variant="h3" {...data} />
+                
               ))}
-            </ul>
+            </ul> */}
           </section>
           {recentPosts.length > 0 && <Hr />}
         </>

@@ -1,0 +1,180 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getPath } from "@/utils/getPath";
+
+export interface Props {
+  posts?: CollectionEntry<"blog">[];
+  images?: string[];
+  titles?: string[];
+  descriptions?: string[];
+  interval?: number; // 自动播放间隔，单位毫秒
+  showControls?: boolean;
+  showIndicators?: boolean;
+  className?: string; // 添加自定义类名属性
+  marginY?: string; // 添加上边距控制属性
+}
+
+const { 
+  posts = [],
+  images = [], 
+  titles = [], 
+  descriptions = [], 
+  interval = 5000,
+  showControls = true,
+  showIndicators = true,
+  className = "",
+  marginY = "my-6" // 默认边距
+} = Astro.props;
+
+// 如果提供了文章列表，则使用文章信息
+const carouselItems = posts.length > 0 
+  ? posts.map(post => ({
+      image: post.data.coverImg,
+      title: post.data.title,
+      description: post.data.description,
+      link: getPath(post.id, post.filePath)
+    }))
+  : images.map((image, index) => ({
+      image,
+      title: titles[index] || '',
+      description: descriptions[index] || '',
+      link: ''
+    }));
+---
+
+<div class={`carousel relative w-full h-64 overflow-hidden rounded-lg ${marginY} ${className}`}>
+  {carouselItems.map((item, index) => (
+    <div class="carousel-item absolute w-full h-full transition-opacity duration-500 opacity-0" data-index={index}>
+      {item.link ? (
+        <a href={item.link} class="block w-full h-full">
+          <img src={item.image} alt={item.title || `Slide ${index + 1}`} class="w-full h-full object-cover" />
+          {(item.title || item.description) && (
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent">
+              <div class="absolute bottom-4 left-4 right-4 text-white">
+                {item.title && <h3 class="text-lg font-alibaba-puhuiti-bold text-center">{item.title}</h3>}
+                {/* {item.description && <p class="text-sm font-alibaba-puhuiti-thin">{item.description}</p>} */}
+              </div>
+            </div>
+          )}
+        </a>
+      ) : (
+        <>
+          <img src={item.image} alt={item.title || `Slide ${index + 1}`} class="w-full h-full object-cover" />
+          {(item.title || item.description) && (
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent">
+              <div class="absolute bottom-4 left-4 text-white">
+                {item.title && <h3 class="text-lg font-alibaba-puhuiti-bold">{item.title}</h3>}
+                {item.description && <p class="text-sm font-alibaba-puhuiti-thin">{item.description}</p>}
+              </div>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  ))}
+  
+  {showControls && carouselItems.length > 1 && (
+    <>
+      <button class="carousel-control absolute top-1/2 left-2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 focus:outline-none" data-action="prev">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+      </button>
+      <button class="carousel-control absolute top-1/2 right-2 -translate-y-1/2 bg-black/30 text-white p-2 rounded-full hover:bg-black/50 focus:outline-none" data-action="next">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+    </>
+  )}
+  
+  {showIndicators && carouselItems.length > 1 && (
+    <div class="carousel-indicators absolute bottom-2 left-1/2 -translate-x-1/2 flex space-x-2">
+      {carouselItems.map((_, index) => (
+        <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white focus:outline-none" data-index={index}></button>
+      ))}
+    </div>
+  )}
+</div>
+
+<script define:vars={{ interval }}>
+  // 脚本部分保持不变
+  document.addEventListener('astro:page-load', () => {
+    const carousel = document.querySelector('.carousel');
+    if (!carousel) return;
+    
+    const items = carousel.querySelectorAll('.carousel-item');
+    const controls = carousel.querySelectorAll('.carousel-control');
+    const indicators = carousel.querySelectorAll('.carousel-indicators button');
+    
+    let currentIndex = 0;
+    let timer;
+    
+    // 显示当前幻灯片
+    function showSlide(index) {
+      items.forEach((item, i) => {
+        item.classList.toggle('opacity-0', i !== index);
+        item.classList.toggle('opacity-100', i === index);
+      });
+      
+      indicators.forEach((indicator, i) => {
+        indicator.classList.toggle('bg-white/50', i !== index);
+        indicator.classList.toggle('bg-white', i === index);
+      });
+      
+      currentIndex = index;
+    }
+    
+    // 下一张幻灯片
+    function nextSlide() {
+      showSlide((currentIndex + 1) % items.length);
+    }
+    
+    // 上一张幻灯片
+    function prevSlide() {
+      showSlide((currentIndex - 1 + items.length) % items.length);
+    }
+    
+    // 自动播放
+    function startAutoplay() {
+      stopAutoplay();
+      if (interval > 0) {
+        timer = setInterval(nextSlide, interval);
+      }
+    }
+    
+    // 停止自动播放
+    function stopAutoplay() {
+      if (timer) {
+        clearInterval(timer);
+      }
+    }
+    
+    // 初始化
+    showSlide(0);
+    startAutoplay();
+    
+    // 事件监听
+    controls.forEach(control => {
+      control.addEventListener('click', () => {
+        const action = control.dataset.action;
+        if (action === 'next') {
+          nextSlide();
+        } else if (action === 'prev') {
+          prevSlide();
+        }
+        startAutoplay();
+      });
+    });
+    
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        showSlide(index);
+        startAutoplay();
+      });
+    });
+    
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+  });
+</script>
