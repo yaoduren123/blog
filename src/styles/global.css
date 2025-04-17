@@ -6,25 +6,48 @@
 
 :root,
 html[data-theme="light"] {
-  --background: #fdfdfd;
+  /* --background: #fdfdfd;
   --foreground: #282728;
   --accent: #006cac;
   --muted: #e6e6e6;
-  --border: #ece9e9;
-  --un-preset-theme-colors-shadow: 0 0 0;
-  --un-preset-theme-colors-shadow--alpha: .04;
-  --un-preset-theme-colors-background: 255 255 255;
-  --un-preset-theme-colors-primary: 46 64 91;
-  --uno-colors-shadow: rgb(var(--un-preset-theme-colors-shadow)/var(--un-preset-theme-colors-shadow--alpha, 1));
-  background-image: linear-gradient(to right,var(--uno-colors-shadow) 1px,transparent 1px),linear-gradient(to bottom,var(--uno-colors-shadow) 1px,transparent 1px)
+  --border: #ece9e9; */
+  
+  /* Lobster */
+  /* --background: #f6eee1;
+  --foreground: #012c56;
+  --accent: #e14a39;
+  --muted: #efd8b0;
+  --border: #dc9891; */
+
+  /* Leaf Blue */
+  --background: #f2f5ec;
+  --foreground: #353538;
+  --accent: #1158d1;
+  --muted: #bbc789;
+  --border: #7cadff;
+
+  /* Pinky light */
+  /* --background: #fafcfc;
+  --foreground: #222e36;
+  --accent: #d3006a;
+  --muted: #f1bad4;
+  --border: #e3a9c6; */
+
+
 }
 
 html[data-theme="dark"] {
-  --background: #212737;
+  /* --background: #212737;
   --foreground: #eaedf3;
   --accent: #ff6b01;
   --muted: #343f60bf;
-  --border: #ab4b08;
+  --border: #ab4b08; */
+
+  --background: #21233d;
+  --foreground: #f4f7f5;
+  --accent: #ff5256;
+  --muted: #4a4e86;
+  --border: #b12f32;
 }
 
 @theme inline {
@@ -36,7 +59,7 @@ html[data-theme="dark"] {
 }
 a {
   text-decoration: none;
-  color: inherit;
+  color: var(--color-accent);
 }
 @layer base {
   * {

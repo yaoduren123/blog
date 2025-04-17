@@ -5,11 +5,16 @@
 
 @layer base {
   .prose {
-    @apply prose-headings:!mb-3 prose-headings:!text-foreground prose-h3:italic prose-p:!text-foreground prose-a:!text-foreground prose-a:!decoration-dashed prose-a:underline-offset-8 hover:prose-a:text-accent prose-blockquote:!border-l-accent/50 prose-blockquote:opacity-80 prose-figcaption:!text-foreground prose-figcaption:opacity-70 prose-strong:!text-foreground prose-code:rounded prose-code:bg-muted/75 prose-code:p-1 prose-code:!text-foreground prose-code:before:!content-none prose-code:after:!content-none prose-ol:!text-foreground prose-ul:overflow-x-clip prose-ul:!text-foreground prose-li:marker:!text-accent prose-table:text-foreground prose-th:border prose-th:border-border prose-td:border prose-td:border-border prose-img:mx-auto prose-img:!my-2 prose-img:border-2 prose-img:border-border prose-hr:!border-border;
+    @apply prose-headings:!mb-3 prose-headings:!text-foreground prose-h2:border-l-3 prose-h2:border-accent/70 prose-h2:pl-3 prose-h2:py-1 prose-h3:text-accent/90 prose-h3:font-medium prose-h3:pb-1 prose-h3:border-b prose-h3:border-accent/30 prose-p:!text-foreground prose-a:!text-foreground prose-a:!decoration-dashed prose-a:underline-offset-8 hover:prose-a:text-accent prose-blockquote:!border-l-accent/50 prose-blockquote:opacity-80 prose-figcaption:!text-foreground prose-figcaption:opacity-70 prose-strong:!text-foreground prose-code:rounded prose-code:bg-muted/75 prose-code:p-1 prose-code:!text-foreground prose-code:before:!content-none prose-code:after:!content-none prose-ol:!text-foreground prose-ul:overflow-x-clip prose-ul:!text-foreground prose-li:marker:!text-accent prose-table:text-foreground prose-th:border prose-th:border-border prose-td:border prose-td:border-border prose-img:mx-auto prose-img:!my-2 prose-img:border-2 prose-img:border-border prose-hr:!border-border;
   }
   .prose a {
     @apply break-words hover:!text-accent;
   }
+
+  .prose p {
+    @apply !mt-1.5 !mb-1.5;
+  }
+
   .prose thead th:first-child,
   tbody td:first-child,
   tfoot td:first-child {
@@ -28,6 +33,27 @@
     @apply hidden;
   }
 
+  /* 时间轴样式的无序列表 */
+.prose ul:not(.contains-task-list) {
+  @apply pl-0 relative;
+}
+
+.prose ul:not(.contains-task-list) li {
+  padding-inline-start: 1em!important;
+  @apply pb-5 pt-0 !mt-0 !mb-0 relative border-l-2 border-accent/30 ml-4 list-none  text-sm border-l-2;
+}
+
+.prose ul:not(.contains-task-list) li:before {
+  content: "";
+  @apply absolute w-4 h-4 rounded-full bg-accent/70 -left-[9px] top-1 border-2 border-background;
+}
+
+.prose ul:not(.contains-task-list) li:last-child {
+  @apply border-l-0 mb-0;
+}
+
+
+
   /* ===== Code Blocks & Syntax Highlighting ===== */
   pre:has(code) {
     @apply border border-border;
@@ -35,6 +61,8 @@
 
   .prose code,
   .prose blockquote {
+    white-space: pre-wrap;
+    font-family: 'AlibabaPuHuiTi-Regular'!important;
     @apply break-words;
   }
 
@@ -44,7 +72,10 @@
   }
 
   pre > code {
-    white-space: pre;
+    white-space: pre-wrap;
+    span {
+      font-family: 'AlibabaPuHuiTi-Regular'!important;
+    }
   }
 
   /* Apply Dark Theme (if multi-theme specified) */
