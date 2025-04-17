@@ -11,7 +11,7 @@ export interface Props {
   showControls?: boolean;
   showIndicators?: boolean;
   className?: string; // 添加自定义类名属性
-  marginY?: string; // 添加上边距控制属性
+  marginTop?: string; // 添加上边距控制属性
 }
 
 const { 
@@ -23,7 +23,7 @@ const {
   showControls = true,
   showIndicators = true,
   className = "",
-  marginY = "my-6" // 默认边距
+  marginTop = "mt-6" // 默认边距
 } = Astro.props;
 
 // 如果提供了文章列表，则使用文章信息
@@ -42,7 +42,7 @@ const carouselItems = posts.length > 0
     }));
 ---
 
-<div class={`carousel relative w-full h-64 overflow-hidden rounded-lg ${marginY} ${className}`}>
+<div class={`carousel relative w-full h-64 overflow-hidden rounded-lg ${marginTop} ${className}`}>
   {carouselItems.map((item, index) => (
     <div class="carousel-item absolute w-full h-full transition-opacity duration-500 opacity-0" data-index={index}>
       {item.link ? (
