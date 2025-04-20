@@ -1,6 +1,9 @@
 @import "tailwindcss";
+@import "flowbite/src/themes/default";
 @import "./typography.css";
 @import "./fonts.css";
+
+@source "../../node_modules/flowbite";
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 

@@ -32,25 +32,9 @@
   .prose h2#table-of-contents + p {
     @apply hidden;
   }
-
-  /* 时间轴样式的无序列表 */
-.prose ul:not(.contains-task-list) {
-  @apply pl-0 relative;
-}
-
-.prose ul:not(.contains-task-list) li {
-  padding-inline-start: 1em!important;
-  @apply pb-5 pt-0 !mt-0 !mb-0 relative border-l-2 border-accent/30 ml-4 list-none  text-sm border-l-2;
-}
-
-.prose ul:not(.contains-task-list) li:before {
-  content: "";
-  @apply absolute w-4 h-4 rounded-full bg-accent/70 -left-[9px] top-1 border-2 border-background;
-}
-
-.prose ul:not(.contains-task-list) li:last-child {
-  @apply border-l-0 mb-0;
-}
+  .prose strong {
+    @apply text-foreground text-accent
+  }
 
 
 
@@ -61,7 +45,6 @@
 
   .prose code,
   .prose blockquote {
-    white-space: pre-wrap;
     font-family: 'AlibabaPuHuiTi-Regular'!important;
     @apply break-words;
   }
