@@ -1,0 +1,242 @@
+---
+author: 若浅谈科技
+pubDatetime: 2025-04-20 00:20:35
+title: 大语言模型(LLMs)的函数调用(Function Calling)
+featured: true
+draft: false
+tags:
+  - AI
+coverImg: /function_calling_diagram.svg
+description:
+  函数调用（Function Calling）是一项强大的能力，它使大语言模型（LLMs）能够以结构化的方式与您的代码和外部系统进行交互。不同于仅生成文本响应，LLMs 能够智能判断何时需要调用特定函数，并自动提供执行实际任务所需的完整参数。
+---
+
+函数调用（Function Calling）是一项强大的能力，它使大语言模型（LLMs）能够以结构化的方式与您的代码和外部系统进行交互。不同于仅生成文本响应，LLMs 能够智能判断何时需要调用特定函数，并自动提供执行实际任务所需的完整参数。
+
+## 函数调用实现机制
+
+该过程遵循以下步骤：
+
+![](/function_calling_diagram.svg)
+
+
+这一循环可根据需要持续进行，从而实现应用程序与大语言模型之间复杂的多步骤交互。
+
+## 实际用例
+
+函数调用（Function Calling）在以下实际应用场景中具有重要价值：
+
+● **数据检索**  
+将自然语言查询转换为API调用（如"查询最近的订单"会触发数据库查询）
+
+● **操作执行**  
+将用户请求转化为具体操作（如"安排会议"会调用日历API创建事件）
+
+● **计算任务**  
+通过专用函数处理复杂运算（如复利计算、统计分析等数学逻辑操作）
+
+● **数据处理管道**  
+串联多个函数调用构建处理流（数据获取 → 解析 → 转换 → 存储）
+
+● **UI/UX集成**  
+根据交互触发界面更新（如更新地图标记位置或动态渲染数据图表）
+
+## 使用工具（功能定义）
+工具是定义大语言模型可调用函数的主要方式，每个工具必须包含：
+- 唯一性名称（作为功能标识符）
+- 清晰的功能描述（指导模型理解使用场景）
+- 参数定义规范（采用JSON Schema格式描述预期参数）
+
+下面是一个定义天气相关函数的示例：
+
+```python
+from huggingface_hub import InferenceClient
+
+client = InferenceClient("http://localhost:8080") # Replace with your HUGS host
+messages = [
+    {
+        "role": "system",
+        "content": "Don't make assumptions about values. Ask for clarification if needed.",
+    },
+    {
+        "role": "user",
+        "content": "What's the weather like the next 3 days in San Francisco, CA?",
+    },
+]
+
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "get_n_day_weather_forecast",
+            "description": "Get an N-day weather forecast",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The city and state, e.g. San Francisco, CA",
+                    },
+                    "format": {
+                        "type": "string",
+                        "enum": ["celsius", "fahrenheit"],
+                        "description": "The temperature unit to use",
+                    },
+                    "num_days": {
+                        "type": "integer",
+                        "description": "The number of days to forecast",
+                    },
+                },
+                "required": ["location", "format", "num_days"],
+            },
+        },
+    }
+]
+
+response = client.chat_completion(
+    messages=messages,
+    tools=tools,
+    tool_choice="auto",
+    max_tokens=500,
+)
+print(response.choices[0].message.tool_calls[0].function)
+# ChatCompletionOutputFunctionDefinition(arguments={'format': 'celsius', 'location': 'San Francisco, CA', 'num_days': 3}, name='get_n_day_weather_forecast', description=None)
+```
+模型将解析用户请求内容，据此生成符合规范的结构化调用指令，准确匹配目标函数并传递精确参数。
+
+## 基于Pydantic模型实现结构化输出 
+
+为强化类型安全与数据验证机制，可采用Pydantic模型定义函数接口规范。
+
+该方案具备以下技术优势：
+- 实时类型校验（Runtime Type Checking） 
+- 自动化数据校验流程 
+- 增强IDE智能提示支持 
+- 基于Python原生类型系统的自解释文档 
+
+以下是具体实现方法：
+
+```python
+from pydantic import BaseModel, Field
+from typing import List
+
+
+class ParkObservation(BaseModel):
+    location: str = Field(..., description="Where the observation took place")
+    activity: str = Field(..., description="What activity was being done")
+    animals_seen: int = Field(..., description="Number of animals spotted", ge=1, le=5)
+    animals: List[str] = Field(..., description="List of animals observed")
+
+
+client = InferenceClient("http://localhost:8080")  # Replace with your HUGS host
+response_format = {"type": "json", "value": ParkObservation.model_json_schema()}
+
+
+messages = [
+    {
+        "role": "user",
+        "content": "I saw a puppy, a cat and a raccoon during my bike ride in the park.",
+    },
+]
+
+
+response = client.chat_completion(
+    messages=messages,
+    response_format=response_format,
+    max_tokens=500,
+)
+print(response.choices[0].message.content)
+# {   "activity": "bike ride",
+#     "animals": ["puppy", "cat", "raccoon"],
+#     "animals_seen": 3,
+#     "location": "the park"
+# }
+```
+
+该机制将生成符合预定结构规范的JSON数据对象，这种标准化数据格式能显著降低解析复杂度，确保在应用程序中实现无缝集成与高效利用。
+
+## 高级使用模式
+
+### 链式函数调用
+
+llm可以协调多个函数调用来完成复杂的任务：
+
+```python
+tools = [
+    {
+        "type": "function",
+        "function": {
+            "name": "search_products",
+            "description": "Search product catalog",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string"},
+                    "category": {"type": "string", "enum": ["electronics", "clothing", "books"]}
+                }
+            }
+        }
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "create_order",
+            "description": "Create a new order",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "product_id": {"type": "string"},
+                    "quantity": {"type": "integer", "minimum": 1}
+                }
+            }
+        }
+    }
+]
+```
+### 错误处理和执行
+
+在执行函数之前总是验证函数调用：
+
+```python
+import json
+
+def get_n_day_weather_forecast(location, format, num_days):
+    return '{"temperature": 70, "condition": "sunny"}'
+
+def handle_tool_call(tool_call):
+    try:
+        args = tool_call.function.arguments
+        # Validate required parameters
+        if tool_call.function.name == "get_n_day_weather_forecast":
+            if not all(k in args for k in ["location", "format", "num_days"]):
+                raise ValueError("Missing required parameters")
+            # Only pass arguments that match the function's parameters
+            valid_args = {k: v for k, v in args.items() 
+                         if k in get_n_day_weather_forecast.__code__.co_varnames}
+            return get_n_day_weather_forecast(**valid_args)
+    except json.JSONDecodeError:
+        return {"error": "Invalid function arguments"}
+    except Exception as e:
+        return {"error": str(e)}
+
+res = handle_tool_call(response.choices[0].message.tool_calls[0])
+print(res)
+# {"temperature": 70, "condition": "sunny"}
+```
+
+## 最佳实践指南
+
+### 函数设计规范
+- 命名语义化：采用清晰明确的函数命名规则
+- 文档完整性：为函数及参数提供详细描述说明
+- 参数约束：明确定义参数约束条件（取值范围/枚举类型等）
+
+### 异常处理机制
+- 输入校验：执行严格的输入参数校验流程
+- 错误隔离：构建函数调用失败的错误处理机制
+- 容错设计：针对瞬时性故障实施智能重试策略
+
+### 安全防护体系
+- 输入净化：执行前进行输入验证与净化处理
+- 访问控制：部署速率限制与层级化访问控制
+- 权限管理：基于用户上下文配置函数调用权限
