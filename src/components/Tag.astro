@@ -1,5 +1,4 @@
 ---
-import IconHash from "@/assets/icons/IconHash.svg";
 
 export interface Props {
   tag: string;
@@ -8,29 +7,39 @@ export interface Props {
 }
 
 const { tag, tagName, size = "sm" } = Astro.props;
+
+function getRandomColor() {
+  const colors = [
+    "blue",
+    "red",
+    "orange",
+    "pink",
+    "indigo",
+    "green",
+    "purple",
+    "yellow",
+    "cyan",
+    "teal",
+    "gray"
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
 ---
 
 <li
   class:list={[
-    "group inline-block group-hover:cursor-pointer",
-    size === "sm" ? "my-1 underline-offset-4" : "mx-1 my-3 underline-offset-8",
+    "group inline-block group-hover:cursor-pointer mr-4"
   ]}
 >
   <a
     href={`/tags/${tag}/`}
-    transition:name={tag}
     class:list={[
-      "relative pr-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1",
-      { "text-sm": size === "sm" },
+      `bg-primary-100 dark:bg-primary-100 me-2 px-2.5 py-0.5 rounded-sm`,
+      "text-accent inline-flex justify-center items-center font-medium   rounded-sm   relative  text-lg  group-hover:text-accent focus-visible:p-1",
     ]}
   >
-    <IconHash
-      class:list={[
-        "inline-block opacity-80",
-        { "-mr-3.5 size-4": size === "sm" },
-        { "-mr-5 size-6": size === "lg" },
-      ]}
-    />
-    &nbsp;<span>{tagName}</span>
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-tag-icon lucide-tag"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+    <span>{tagName}</span>
   </a>
 </li>

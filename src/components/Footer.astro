@@ -1,7 +1,9 @@
 ---
 import Hr from "./Hr.astro";
 import Socials from "./Socials.astro";
-
+import IconRss from "@/assets/icons/IconRss.svg";
+// import IconPalette from "@/assets/icons/IconPalette.svg"; // 添加调色板图标
+import LinkButton from "./LinkButton.astro";
 const currentYear = new Date().getFullYear();
 
 export interface Props {
@@ -14,13 +16,22 @@ const { noMarginTop = false } = Astro.props;
 <footer class:list={["w-full", { "mt-auto": !noMarginTop }]}>
   <Hr noPadding />
   <div
-    class="flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4"
+    class="flex flex-col items-center justify-center py-6 sm:flex-row-reverse sm:py-4"
   >
     <Socials centered />
-    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
+    <div class="my-2 flex justify-center items-center whitespace-nowrap sm:flex-row">
       <span>Copyright &#169; {currentYear}</span>
       <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
       <span>All rights reserved.</span>
+      <LinkButton
+              href="/rss.xml"
+              class="focus-outline flex p-3 sm:p-1 hover:text-accent"
+              ariaLabel="rss feed"
+              title="RSS 订阅"
+            >
+              <IconRss class="w-5 h-5 stroke-current" />
+              <span class="sr-only">RSS 订阅</span>
+            </LinkButton>
     </div>
   </div>
 </footer>

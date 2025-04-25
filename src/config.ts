@@ -10,7 +10,7 @@ export const SITE = {
   postPerPage: 4,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
   showArchives: false,
-  showBackButton: true, // show back button in post detail
+  showBackButton: false, // show back button in post detail
   editPost: {
     enabled: false,
     text: "",
@@ -20,3 +20,4 @@ export const SITE = {
   lang: "zh-CN", // html lang code. Set this empty and default will be "en"
   timezone: "Asia/Shanghai", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 } as const;
+

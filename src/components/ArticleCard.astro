@@ -1,0 +1,61 @@
+---
+// import { slugifyStr } from "@/utils/slugify";
+import type { CollectionEntry } from "astro:content";
+import { getPath } from "@/utils/getPath";
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/zh-cn"
+// import 
+// import IconCalendar from "@/assets/icons/IconCalendar.svg";
+import { SITE } from "@/config";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.extend(relativeTime);
+
+dayjs.locale("zh-cn")
+
+export interface Props extends CollectionEntry<"blog"> {
+  variant?: "h2" | "h3";
+}
+
+const { data, id, filePath } = Astro.props;
+
+const { title, description, pubDatetime, author, modDatetime, timezone: postTimezone } = data;
+
+/* ========== Formatted Datetime ========== */
+const isUpdated = modDatetime && modDatetime > pubDatetime;
+const latestDatetime =
+  isUpdated ?  modDatetime : pubDatetime;
+const datetime = dayjs(latestDatetime).tz(postTimezone || SITE.timezone);
+
+const timeStr = (isUpdated ? "更新于" : "发表于") + datetime.fromNow(); // e.g., '22 Mar, 2025'
+// const time = datetime.format("HH:mm"); // e.g., '08:30 PM'
+
+---
+
+<article class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex justify-between items-center mb-5 text-gray-500">
+        <span class="bg-primary-100 font-alibaba-puhuiti text-primary-800 text-sm font-medium inline-flex justify-center items-center px-2.5 py-0.5 rounded dark:bg-primary-200 dark:text-primary-800">
+            <svg class="mr-1 w-4 h-4" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-newspaper-icon lucide-newspaper"><path d="M15 18h-5"/><path d="M18 14h-8"/><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-9a2 2 0 0 1 2-2h2"/><rect width="8" height="4" x="10" y="6" rx="1"/></svg>
+            文章
+        </span>
+        <span class="text-sm font-alibaba-puhuiti">{timeStr}</span>
+    </div>
+    <h2 class="mb-2 text-2xl font-alibaba-puhuiti-bold tracking-tight text-gray-900 dark:text-white"><a href={getPath(id, filePath)}>{title}</a></h2>
+    <p class="mb-5 font-light text-gray-500 font-alibaba-puhuiti dark:text-gray-400">{description}</p>
+    <div class="flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+            <img class="w-7 h-7 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/jese-leos.png" alt="Jese Leos avatar" />
+            <span class="font-medium dark:text-white font-alibaba-puhuiti">
+                {author}
+            </span>
+        </div>
+        <a href={getPath(id, filePath)} class="inline-flex items-center font-medium font-alibaba-puhuiti text-primary-600 dark:text-primary-500 hover:underline">
+            阅读更多
+            <svg class="ml-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </a>
+    </div>
+</article> 

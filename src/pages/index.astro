@@ -5,11 +5,12 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 // import Socials from "@/components/Socials.astro";
 import LinkButton from "@/components/LinkButton.astro";
-import Card from "@/components/Card.astro";
+import Card from "@/components/ArticleCard.astro";
 import Carousel from "@/components/Carousel.astro";
 import getSortedPosts from "@/utils/getSortedPosts";
 import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import { SITE } from "@/config";
+
 // import { SOCIALS } from "@/constants";
 
 const posts = await getCollection("blog");
@@ -57,14 +58,9 @@ const recentPosts = sortedPosts.filter(() => true);
     {
       featuredPosts.length > 0 && (
         <>
-          <section id="featured" class="pt-12 pb-6">
-            <h2 class="text-2xl font-alibaba-puhuiti-bold tracking-wide text-accent">精选热门</h2>
+          <section id="featured" class="pt-12 pb-6 mx-6">
+            <h2 class="text-2xl mb-6 font-alibaba-puhuiti-bold tracking-wide">精选热门</h2>
             <Carousel posts={featuredPosts} interval={5000} showControls={featuredPosts.length > 1} showIndicators={featuredPosts.length > 1} />
-            {/* <ul>
-              {featuredPosts.map(data => (
-                
-              ))}
-            </ul> */}
           </section>
         </>
       )
@@ -72,14 +68,17 @@ const recentPosts = sortedPosts.filter(() => true);
 
     {
       recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-alibaba-puhuiti-bold tracking-wide text-accent">近期文章</h2>
-          <ul>
-            {recentPosts.map(
-              (data, index) =>
-                index < SITE.postPerIndex && <Card variant="h3" {...data} />
-            )}
-          </ul>
+        <section id="recent-posts" class="pt-12 pb-6 mx-6">
+          <h2 class="text-2xl mb-6 font-alibaba-puhuiti-bold tracking-wide text-primary">近期文章</h2>
+          <section class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <>
+            { recentPosts.map(
+                (data, index) =>
+                  index < SITE.postPerIndex && <Card  {...data} />
+                )
+            }
+            </>
+          </section>
         </section>
       )
     }

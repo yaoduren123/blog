@@ -1,20 +1,24 @@
 @import "tailwindcss";
-@import "flowbite/src/themes/default";
+@import "flowbite/src/themes/default"; 
 @import "./typography.css";
 @import "./fonts.css";
+/* @import "./daisy.css"; */
+/* @import "tw-animate-css"; */
+
+@plugin "flowbite/plugin";
 
 @source "../../node_modules/flowbite";
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 :root,
-html[data-theme="light"] {
-  /* --background: #fdfdfd;
+html {
+  --background: #fdfdfd;
   --foreground: #282728;
   --accent: #006cac;
   --muted: #e6e6e6;
-  --border: #ece9e9; */
-  
+  --border: #ece9e9;
+
   /* Lobster */
   /* --background: #f6eee1;
   --foreground: #012c56;
@@ -23,11 +27,11 @@ html[data-theme="light"] {
   --border: #dc9891; */
 
   /* Leaf Blue */
-  --background: #f2f5ec;
+  /* --background: #f2f5ec;
   --foreground: #353538;
   --accent: #1158d1;
   --muted: #bbc789;
-  --border: #7cadff;
+  --border: #7cadff; */
 
   /* Pinky light */
   /* --background: #fafcfc;
@@ -36,10 +40,9 @@ html[data-theme="light"] {
   --muted: #f1bad4;
   --border: #e3a9c6; */
 
-
 }
 
-html[data-theme="dark"] {
+html&.dark {
   /* --background: #212737;
   --foreground: #eaedf3;
   --accent: #ff6b01;
@@ -53,6 +56,19 @@ html[data-theme="dark"] {
   --border: #b12f32;
 }
 
+@theme {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -62,7 +78,8 @@ html[data-theme="dark"] {
 }
 a {
   text-decoration: none;
-  color: var(--color-accent);
+  font-family: "AlibabaPuHuiTi-Regular";
+  /* color: var(--color-accent); */
 }
 @layer base {
   * {
@@ -71,8 +88,29 @@ a {
     scrollbar-color: var(--color-muted) transparent;
   }
   html {
-    @apply overflow-y-scroll scroll-smooth;
+    /* @apply overflow-y-scroll scroll-smooth; */
+    scrollbar-gutter: stable;
   }
+
+  /* 自定义滚动条样式，去除上下箭头 */
+  ::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-muted);
+    border-radius: 10px;
+  }
+
   body {
     @apply flex min-h-svh flex-col bg-background font-mono text-foreground selection:bg-accent/75 selection:text-background;
   }
@@ -80,12 +118,12 @@ a {
   button {
     @apply outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
   }
-  
+
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
-  section,
+  
   footer {
     @apply mx-auto max-w-3xl px-4;
   }

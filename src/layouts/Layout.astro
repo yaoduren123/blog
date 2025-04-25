@@ -127,13 +127,55 @@ const structuredData = {
 
     <ClientRouter />
 
-    <script is:inline src="/toggle-theme.js"></script>
   </head>
   <body>
     <slot />
   </body>
 </html>
+<script>
+import 'flowbite';
+// 在你的全局脚本或布局的 <script> 中
 
+// --- 确保 Flowbite 的初始化函数可用 ---
+// 如果你是通过 CDN 或 <script> 标签引入的，
+// Flowbite 的初始化函数通常会自动挂载到 window 对象上
+// (可能名为 initFlowbite 或类似，请查阅你使用的 Flowbite 版本文档)
+// 假设函数名为 initFlowbite()
+
+function initializeFlowbiteComponents() {
+  console.log("Initializing Flowbite components...");
+  // 检查函数是否存在，避免错误
+  if (typeof window.initFlowbite === 'function') {
+    try {
+      window.initFlowbite(); // 调用 Flowbite 提供的全局初始化函数
+      console.log("Flowbite components initialized.");
+    } catch (error) {
+      console.error("Error initializing Flowbite:", error);
+    }
+  } else {
+    console.warn("initFlowbite function not found. Make sure Flowbite JS is loaded correctly.");
+    // 如果没有全局初始化函数，你可能需要手动查找并初始化
+    // 这会更复杂，需要使用 Flowbite 提供的单个组件的构造函数
+    // 例如:
+    // document.querySelectorAll('[data-dropdown-toggle]').forEach(el => {
+    //   const targetId = el.getAttribute('data-dropdown-toggle');
+    //   const targetEl = document.getElementById(targetId);
+    //   if (targetEl && !targetEl._flowbiteInstance) { // 简单检查是否已初始化
+    //      try {
+    //         const dropdown = new Dropdown(targetEl, el); // 假设有 Dropdown 类
+    //         targetEl._flowbiteInstance = dropdown; // 标记
+    //      } catch(e) { console.error("Error init dropdown", e); }
+    //   }
+    // });
+    // 对 Modal, Collapse 等重复类似逻辑... (这通常不推荐，优先使用官方初始化函数)
+  }
+}
+
+// --- 事件监听 ---
+
+
+
+</script>
 <style>
   html,
   body {
