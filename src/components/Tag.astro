@@ -6,24 +6,24 @@ export interface Props {
   size?: "sm" | "lg";
 }
 
-const { tag, tagName, size = "sm" } = Astro.props;
+const { tag, tagName } = Astro.props;
 
-function getRandomColor() {
-  const colors = [
-    "blue",
-    "red",
-    "orange",
-    "pink",
-    "indigo",
-    "green",
-    "purple",
-    "yellow",
-    "cyan",
-    "teal",
-    "gray"
-  ];
-  return colors[Math.floor(Math.random() * colors.length)];
-}
+// function getRandomColor() {
+//   const colors = [
+//     "blue",
+//     "red",
+//     "orange",
+//     "pink",
+//     "indigo",
+//     "green",
+//     "purple",
+//     "yellow",
+//     "cyan",
+//     "teal",
+//     "gray"
+//   ];
+//   return colors[Math.floor(Math.random() * colors.length)];
+// }
 
 ---
 
