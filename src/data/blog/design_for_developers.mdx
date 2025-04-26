@@ -1,0 +1,568 @@
+---
+author: 若浅谈科技
+pubDatetime: 2025-04-25 14:09:35
+title: 写给开发者的设计指南（一）——色彩篇
+featured: true
+draft: false
+tags:
+  - 网站开发
+  - UI 设计
+coverImg: /assets/colors.png
+description:
+  基本设计规则与公式：打造美观组件、色彩与排版的实用指南
+---
+
+
+![](/assets/colors.png)
+
+## 前言
+
+本系列适合热衷于创建易用且美观的网站与应用程序的开发者。
+
+这份初学者手把手学习指南，教你如何运用设计公式，创建属于自己的用户界面（UI）。
+
+你会学习到如何选择颜色(Colors)，并有效利用布局(Layout)与组件(Components)。
+
+希望你在读完本系列后，能够掌握一些基本的设计原则，从而设计出美观的网站与应用程序。
+
+<div class="flex p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+  <svg class="shrink-0 inline w-4 h-4 me-3 mt-[9px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" stroke="fillColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+    </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    本文主要介绍色彩相关理论，可以让我们更好地理解色彩。
+    
+    本文涵盖以下核心内容：
+    - 原色、间色与复色 
+    - 色相与色温 
+    - 饱和度 
+    - 浅色调/深色调/中间调 
+    - 类比色与互补色 
+    - 色彩心理学 
+    - 色彩权重 
+    - 对比度
+
+
+  </div>
+</div>
+
+## Table of Contents
+
+
+## 原色、间色与复色
+我们以原色来开启我们的色彩理论之旅。
+
+<div class="flex items-center p-2 mb-2 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 inline w-4 h-4 me-3"  aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+  <span class="sr-only">Info</span>
+  <div>
+    原色（Primary Colors）是色彩中不可再分解的基本色
+  </div>
+</div>
+
+在用于数字显示屏幕的RGB色彩模式里，原色有三种：<span class="text-red-500">红色Red</span>、<span class="text-green-500">绿色Green</span>与<span class="text-blue-500">蓝色Blue</span>：
+<div class="relative w-48 h-48 mx-auto my-8">
+  {/* <!-- Invisible SVG circle path --> */}
+  <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="z-index: 0;">
+    {/* Center (50,50), Radius 40 */}
+    <circle cx="50" cy="50" r="40" stroke="black" fill="none" />
+  </svg>
+
+  {/* <!-- Red Circle (Top: 270 deg) --> */}
+  <div class="absolute w-18 h-18 bg-red-500 rounded-full flex items-center justify-center text-white font-bold" style="top: 10%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">红</div>
+
+  {/* <!-- Blue Circle (Bottom Left: 150 deg) --> */}
+  <div class="absolute w-18 h-18 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold" style="top: 70%; left: 15.4%; transform: translate(-50%, -50%); z-index: 1;">蓝</div>
+
+  {/* <!-- Yellow Circle (Bottom Right: 30 deg) --> */}
+  <div class="absolute w-18 h-18 bg-green-400 rounded-full flex items-center justify-center text-black font-bold" style="top: 70%; left: 84.6%; transform: translate(-50%, -50%); z-index: 1;">绿</div>
+</div>
+
+而在绘画颜料领域里的RYB色彩模式里，原色也有三种：<span class="text-red-500">红色Red</span>、<span class="text-yellow-500">黄色Yellow</span>与<span class="text-blue-500">蓝色Blue</span>：
+<div class="relative w-48 h-48 mx-auto my-8">
+  {/* <!-- Invisible SVG circle path --> */}
+  <svg class="absolute inset-0 w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="z-index: 0;">
+    {/* Center (50,50), Radius 40 */}
+    <circle cx="50" cy="50" r="40" stroke="black" fill="none" />
+  </svg>
+
+  {/* <!-- Red Circle (Top: 270 deg) --> */}
+  <div class="absolute w-18 h-18 bg-red-500 rounded-full flex items-center justify-center text-white font-bold" style="top: 10%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">红</div>
+
+  {/* <!-- Blue Circle (Bottom Left: 150 deg) --> */}
+  <div class="absolute w-18 h-18 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold" style="top: 70%; left: 15.4%; transform: translate(-50%, -50%); z-index: 1;">蓝</div>
+
+  {/* <!-- Yellow Circle (Bottom Right: 30 deg) --> */}
+  <div class="absolute w-18 h-18 bg-yellow-400 rounded-full flex items-center justify-center text-black font-bold" style="top: 70%; left: 84.6%; transform: translate(-50%, -50%); z-index: 1;">黄</div>
+</div>
+
+我们可以发现，RGB 与 RYB 色彩模式的命名都是以三原色英文名称的首字母命名的。
+
+这里，我们着重讲一下RYB色彩模式里的三原色。
+
+我们把原色两两混合，可以得到**间色（Secondary Colors）**：
+- <span class="text-red-500">红</span> + <span class="text-yellow-500">黄</span> = <span class="text-orange-500">橙色Orange</span>
+- <span class="text-yellow-500">黄</span> + <span class="text-blue-500">蓝</span> = <span class="text-green-500">绿色Green</span>
+- <span class="text-blue-500">蓝</span> + <span class="text-red-500">红</span> = <span class="text-purple-500">紫色Violet</span>
+
+构成间色的色轮如下：
+
+import Secondary from "@/assets/icons/secondary.svg"
+
+<div class="flex justify-center items-center my-8">
+<Secondary class="items-center" />
+</div>
+
+<div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    在色轮上选用彼此靠近的颜色，有助于营造视觉上的平衡感——即所谓的“色彩和谐”。相反，如果选用色轮上相距较远的颜色，就会打破这种和谐。
+  </div>
+</div>
+混合颜色（调色）也能帮助你构建色轮，以辅助选择互补色和邻近色。
+
+然后，将相邻的原色和间色混合，可以得到**复色（Tertiary Colors）**，例如：
+- <span class="text-red-500">红</span> + <span class="text-orange-500">橙</span> = <span style="color: #f97316">红橙色vermillion</span>
+- <span class="text-orange-500">橙</span> + <span class="text-yellow-500">黄</span> = <span style="color: #eab308">橙黄色amber</span>
+- <span class="text-yellow-500">黄</span> + <span class="text-green-500">绿</span> = <span style="color: #a3e635">黄绿色chartreuse</span>
+- <span class="text-green-500">绿</span> + <span class="text-blue-500">蓝</span> = <span style="color: #14b8a6">蓝绿色teal</span>
+- <span class="text-blue-500">蓝</span> + <span class="text-purple-500">紫</span> = <span style="color: #6366f1">蓝紫色violet</span>
+- <span class="text-purple-500">紫</span> + <span class="text-red-500">红</span> = <span class="text-purple-600">紫红色magenta</span>
+
+<div class="flex justify-center items-center my-8">
+  <svg width="340" height="340" viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="170" cy="170" r="135" stroke="#222" stroke-width="3" fill="none" />
+    {
+      (() => {
+        const colors = [
+          { label: "红", color: "#D32F2F" },
+          { label: "橙红", color: "#FF7043" },
+          { label: "橙", color: "#FFA726" },
+          { label: "橙黄", color: "#FFB300" },
+          { label: "黄", color: "#FEE440" },
+          { label: "黄绿", color: "#B2FF59" },
+          { label: "绿", color: "#388E3C" },
+          { label: "蓝绿", color: "#18E0E0" },
+          { label: "蓝", color: "#2962FF" },
+          { label: "蓝紫", color: "#6C30C2" },
+          { label: "紫", color: "#8E24AA" },
+          { label: "品红", color: "#AD1457" }
+        ];
+        const cx = 170, cy = 170, R = 135, r = 28;
+        return (
+          <>
+            {/* 放射线 */}
+            <g stroke="#222" strokeWidth="2">
+              {
+                colors.map((c, i) => {
+                  const angle = (i / 12) * 2 * Math.PI - Math.PI / 2;
+                  const x = cx + R * Math.cos(angle);
+                  const y = cy + R * Math.sin(angle);
+                  return <line key={i} x1={cx} y1={cy} x2={x} y2={y} />;
+                })
+              }
+            </g>
+            {/* 色圆和汉字标签 */}
+            <g fontFamily="Arial, sans-serif" fontWeight="bold" fontSize="20">
+              {
+                colors.map((c, i) => {
+                  const angle = (i / 12) * 2 * Math.PI - Math.PI / 2;
+                  const x = cx + R * Math.cos(angle);
+                  const y = cy + R * Math.sin(angle);
+                  // 文字颜色根据背景自动调整
+                  const textColor = ["#FEE440", "#B2FF59", "#18E0E0"].includes(c.color) ? "#222" : "#fff";
+                  return (
+                    <g key={i}>
+                      <circle cx={x} cy={y} r={r} fill={c.color} />
+                      <text x={x - (c.label.length > 1 ? 6 : 15)} y={y+7} fill={textColor} textAnchor="middle" Baseline="middle">{c.label}</text>
+                    </g>
+                  );
+                })
+              }
+            </g>
+          </>
+        );
+      })()
+    }
+  </svg>
+</div>
+
+
+这三种类型的颜色（原色、间色、复色）共同构成了经典的**牛顿色环**：
+
+import ColorWheel from '@/components/ColorWheel.astro'
+
+<div class="flex justify-center items-center my-8">
+    <ColorWheel />
+</div>
+
+牛顿色环的发明者是英国物理学家、数学家、天文学家、自然哲学家和炼金术士艾萨克·牛顿爵士。
+
+这个色环至今仍被用来帮助选择色彩搭配、混合颜色以及构建和谐色彩。因为这个色轮被众多设计师验证过，有助于选择更加和谐的颜色，比通常使用的RGB或HEX选择的颜色更好。
+
+<div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    这些颜色构成了我们色轮的基础。后续，我们将用这个色轮来定义色温与色相。
+  </div>
+</div>
+
+## 色相(HUE) / 色轮(COLOR WHEEL)
+
+<div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    色相就是色彩的基本样貌，是区分不同颜色的基本特征（如红色、黄色、蓝色等），不涉及颜色的明暗或饱和度
+  </div>
+</div>
+
+色相指的就是我们所选定的特定颜色。
+
+色轮则是由原色、间色和三次色（复色）扩展构成的。 
+
+Adobe 提供了一个很棒的[<span class="text-accent">色轮工具</span>](https://color.adobe.com/zh/create/color-wheel)，你可以在上面选择颜色。
+
+试一试这个工具，你就会发现：
+
+<div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    改变色相，本质上就是在色轮上进行旋转操作。
+  </div>
+</div>
+
+## 色温（COLOR temperature）
+
+<div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    色温是指色彩的冷暖程度。
+  </div>
+</div>
+
+参照自然界，色温很容易辨别：红色、橙色和黄色属于暖色，而蓝色、绿色和紫色则属于冷色。通过给颜色添加蓝色或黄色，可以调整其色温。 
+
+当冷暖色一起使用时，我们可以帮助用户更好地识别关注的焦点。
+
+<div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    暖色总比冷色更能吸引注意力。
+  </div>
+</div>
+
+<div class="flex items-center justify-between">
+    <div  class="block max-w-sm p-6 mr-4 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight !text-orange-500 dark:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun-icon lucide-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>暖色</h5>
+        <p class="font-normal text-gray-700 dark:text-gray-400">倾向于引人注目，因此也经常被用来显示`警告信息`或指示`关键的互动元素`。</p>
+    </div>
+    <div  class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight  dark:text-white !text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" class="text-sky-500" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m10 20-1.25-2.5L6 18"/><path d="M10 4 8.75 6.5 6 6"/><path d="m14 20 1.25-2.5L18 18"/><path d="m14 4 1.25 2.5L18 6"/><path d="m17 21-3-6h-4"/><path d="m17 3-3 6 1.5 3"/><path d="M2 12h6.5L10 9"/><path d="m20 10-1.5 2 1.5 2"/><path d="M22 12h-6.5L14 15"/><path d="m4 10 1.5 2L4 14"/><path d="m7 21 3-6-1.5-3"/><path d="m7 3 3 6h4"/></svg>冷色</h5>
+        <p class="font-normal text-gray-700 dark:text-gray-400">较为常见，易于融入背景。它们可以构成`布局的基本框架`、`次要选项`或`常规的交互元素`</p>
+    </div>
+</div>
+
+## 饱和度（Saturation）
+
+色彩的饱和度由其纯度决定。加入白色、黑色或灰色都会降低饱和度（使颜色不那么鲜艳）。 
+
+例如，一个纯蓝色可能会太过鲜艳刺眼，所以我们常通过添加不同程度的灰度、白色或黑色（也就是调整色彩的色调 Tone、明色调 Tint 和暗色调 Shade）来让颜色达到平衡。 通常建议，在选择颜色时，从（图示的）虚线方框区域内选取。 这个区域内的颜色对多数人而言是视觉安全且舒适的，因为过于饱和的颜色容易给人刺眼或不适感。
+
+![饱和度](/assets/SATURATION.png)
+
+### 亮（明）色调（Tint）
+![明色调](/assets/tint.png)
+
+<div class="flex items-center p-4 mx-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    向颜色中添加或减少白色会改变其色调，并因此降低减轻其饱和度。
+  </div>
+</div>
+
+色调会使颜色变浅，使副文本或描述的重要性降低。
+
+<div  class="relative max-w-2/3 p-6 mx-auto my-6 bg-white border border-green-500 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="absolute top-[-15px] left-1/2 !translate-x-[-50%] text-xl !text-center px-2 font-bold tracking-tight bg-white dark:bg-black !text-orange-500 dark:text-white">小贴士</div>
+    - 请使用明色调处理文本或组件，以排列（视觉元素）或反映其顺序/层级。
+    - 请对标题下方的描述性文本应用明色调。
+    - 请对按钮或其他组件应用明色调，以使其更好地融入背景。
+</div>
+
+### 灰色调 （Tone）
+
+![灰色调](/assets/tone.png)
+
+<div class="flex items-center p-4 mx-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    向颜色中加入或去除灰色会改变其色调，并因此降低颜色的饱和度。 
+  </div>
+</div>
+那些灰色成分更多、饱和度更低的颜色，在视觉上会让人感觉更平静、更舒缓。
+
+<div  class="relative max-w-2/3 p-6 mx-auto my-6 bg-white border border-green-500 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="absolute top-[-15px] left-1/2 !translate-x-[-50%] text-xl !text-center px-2 font-bold tracking-tight bg-white dark:bg-black !text-orange-500 dark:text-white">小贴士</div>
+    - 给颜色适当加入一些灰调，这是一种好的设计实践（可以使颜色不那么刺眼）。
+    - 运用灰调来让界面元素更好地融入背景之中（降低其视觉突出度）。
+    - 对按钮等组件应用灰调处理，以降低它们的视觉优先级（表示它们不是主要操作或处于非激活状态）。
+</div>
+
+### 暗色调（Shade）
+
+![暗色调](/assets/shade.png)
+
+<div class="flex items-center p-4 mx-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span class="sr-only">Info</span>
+  <div>
+    向颜色中加入或去除黑色会改变其暗色调，并因此降低其饱和度。
+  </div>
+</div>
+
+暗色调会使颜色变深，从而能够产生更强的对比度并提高（视觉）优先级。
+
+<div  class="relative max-w-2/3 p-6 mx-auto my-6 bg-white border border-green-500 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="absolute top-[-15px] left-1/2 !translate-x-[-50%] text-xl !text-center px-2 font-bold tracking-tight bg-white dark:bg-black !text-orange-500 dark:text-white">小贴士</div>
+    - 请给需要优先显示的标题/页眉文本添加暗色调（或：使用深色）。
+    - 当为组件或按钮应用悬停（hover）效果时，请对其背景应用暗色调（即加深背景色）。
+    - 请确保使用的颜色添加了一些暗色调，这样它们就不会显得过于饱和。
+</div>
+
+## 选择颜色
+
+无论是构建网站还是应用程序，选用色彩搭配得当都非常关键。要成功挑选出和谐的颜色组合，可以运用一些诀窍。
+
+我们可以利用色轮，并采用下列配色方法，来找出彼此协调、效果良好的颜色组合（通常涉及原色与二次色及其互补色）
+
+- 单色组合 (Monochromatic colors): 基于单一色相的不同色调、明暗和饱和度。
+- 类似色组合 (Analogous colors): 色轮上相邻的颜色。
+- 三色组合 (Triadic colors): 色轮上等距分布的三种颜色。
+- 四色组合/矩形配色 (Tetradic colors / Double complementary): 由两对互补色组成的四种颜色。
+- 类似色与互补色组合 (Analogous complementary colors): 类似色组加上其中主色的互补色。
+
+### 单色组合 (Monochromatic colors)
+
+![单色组合](/assets/monochrome.png)
+
+运用单一的基础色，并通过混合其明色调（Tint加白）、灰调（Tone加灰）和暗色调（Shade加黑），你就可以生成多种色彩变体。 
+
+这些不同的色彩在饱和度上会有所差异。 其中，颜色较深的（暗色调）适合用作标题和按钮（以突出重点），而颜色较浅的（明色调）则适合用作背景和边框（以提供衬托或区隔）
+
+![单色组合](/assets/单色组合.png)
+![单色组合示例](/assets/单色组合_示例.png)
+
+### 类似色组合 (Analogous colors)
+
+![类似色组合](/assets/analogous_colors.png)
+
+要想选出搭配起来效果不错的多种颜色，诀窍是选择色轮上紧挨着主色的颜色（即类似色）。 比如，绿色在色轮上的“邻居”就有蓝色和黄绿色（Chartreuse）。 
+
+运用这种方法，我们就能得到三种类似色，可以灵活地在设计中进行组合与搭配。
+
+![类似色组合示例](/assets/analogous_colors_example.png)
+
+### 互补色组合 (Complementary colors)
+
+![互补色组合](/assets/complementary_colors.png)
+
+作为替代方案，我们可以选择两种能够良好搭配的颜色，方法是找到它们在色轮上的“对家”（即互补色）。这些互补色就位于色轮直径的两端，彼此正对。 比如蓝色配橙色、红色配绿色，就是典型的互补色组合。 选定基础互补色后，我们还可以进一步调整它们的明暗度（通过明色调/暗色调）和饱和度（通过灰调），来丰富和完善最终的配色方案。
+
+![互补色组合示例](/assets/complementary_colors_example.png)
+
+### 三色组合 (Triadic colors)
+
+![三色组合](/assets/triadic_colors.png)
+
+若想选出三种对比鲜明的颜色，可以采用三色组（Triadic）配色方案，也就是在色轮上选取构成（通常是等边）三角形的三个颜色。 在选出的这三种颜色中，通常会确定两种作为设计中的主色调，而剩下的一种则作为次要色，经常用于背景区域。
+
+![三色组合示例](/assets/triadic_colors_example.png)
+
+## 什么是色彩心理学？
+
+颜色根据其用法和搭配方式会传达不同的含义。这就是为什么警报信息通常用红色显示，而确认按钮则用绿色。
+
+![色彩心理学](/assets/色彩心理学.png)
+
+了解不同颜色的含义，有助于你选用最贴切的色彩来传达预设信息，从而打造出更优秀的网站和应用程序。 
+
+背景颜色的选择，对于用户如何感知网站的权威感也扮演着关键角色。 
+
+诸如绿色、黄色、粉色等鲜艳色彩能为网站注入更年轻活泼的气息；相比之下，深蓝色和黑色则更容易营造出商务化或企业化的感觉。
+
+
+
+| 颜色名称            | 传递信息关键词 |
+| :----------------------- | :----------------------------- |
+| 红色 (Red)               | 危险，强大，重要             |
+| 橙红色 (Vermillion)       | 警告，友好，成功             |
+| 橙色 (Orange)            | 强调，乐趣，表达             |
+| 黄橙色 (Amber)| 友好，动感，吸引             |
+| 黄色 (Yellow)            | 突出，积极，活力             |
+| 黄绿色 (chartreuse)    | 信息，积极，教育             |
+| 绿色 (Green)             | 安全，稳定，平衡             |
+| 青色/蓝绿色 (Teal)  | 细节，沟通，信任             |
+| 蓝色 (Blue)              | 可靠，财务，忠诚             |
+| 靛蓝 (Violet)            | 启发，神秘，创意             |
+| 紫色 (Purple)            | 勇气，高贵，奢华             |
+| 品红/紫红色 (Magenta) | 创造力，想象力，年轻         |
+
+## 如何使用色彩权重？
+
+就像字体有粗细之分，颜色也可以设定不同的“权重”或“色阶”，理想的数值范围通常是从 100、200... 一直延续到 700、800。 数值越低，表示颜色越浅（更接近白色，即增加了明色调/tint）；数值越高，则表示颜色越深（更接近黑色，即增加了暗色调/shade）。 
+
+为网站挑选颜色时，预先定义好这些不同的颜色权重（色阶）非常重要，这些定义将成为后续样式指南的基础。 
+
+定义好的颜色权重可以被引用，用于指定标题、背景、按钮以及悬停状态等不同元素的具体颜色。 
+
+当切换到深色模式（Dark Mode）时，通常意味着要将这些权重的应用顺序颠倒过来，比如，原先在浅色模式下使用 100（最浅）的地方，在深色模式下可能会对应使用 800（较深）的颜色。
+
+
+<div className="flex flex-col items-center my-8 bg-gray-50 p-6 rounded-lg">
+  {/* 顶部标题 */}
+  <h3 className="text-gray-600 text-2xl font-semibold mb-6">色彩权重及其使用</h3>
+  
+  <div className="flex w-full justify-between">
+    {/* 左侧区块 - 浅色模式 */}
+    <div className="flex flex-col items-end w-1/3">
+      <div className="flex items-center mb-4 mr-8">
+        <span className="text-gray-700 font-bold mr-2">浅色模式</span>
+        {/* <div className="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center">
+          
+        </div> */}
+      </div>
+      <div className="flex flex-col items-end text-right mr-8">
+        <div className="h-10" >背景 Backgrounds</div>
+        <div className="h-10" >标签 Labels</div>
+        <div className="h-10" >标记 Tags</div>
+        <div className="h-10">主色 Primary Color</div>
+        <div className="h-10 text-sm">次要暗色调 Secondary Shade</div>
+        <div className="h-10">按钮悬停 Button Hovers</div>
+        <div className="h-10">覆盖层 Overlays</div>
+        <div className="h-10">文本 Text</div>
+      </div>
+    </div>
+    
+    {/* 中间区块 - 色彩权重 */}
+    <div className="flex flex-col w-1/3">
+      <div className="flex flex-col mt-10">
+        <div className="h-10 bg-yellow-100 flex items-center justify-center text-white font-semibold">100</div>
+        <div className="h-10 bg-yellow-200 flex items-center justify-center text-white font-semibold">200</div>
+        <div className="h-10 bg-yellow-300 flex items-center justify-center text-white font-semibold">300</div>
+        <div className="h-10 bg-yellow-400 flex items-center justify-center text-white font-semibold">400</div>
+        <div className="h-10 bg-yellow-500 flex items-center justify-center text-white font-semibold">500</div>
+        <div className="h-10 bg-yellow-600 flex items-center justify-center text-white font-semibold">600</div>
+        <div className="h-10 bg-yellow-700 flex items-center justify-center text-white font-semibold">700</div>
+        <div className="h-10 bg-yellow-800 flex items-center justify-center text-white font-semibold">800</div>
+      </div>
+      
+    </div>
+    
+    {/* 右侧区块 - 深色模式 */}
+    <div className="flex flex-col items-start w-1/3">
+      <div className="flex flex-col items-start text-left h-full justify-between mt-10">
+        <div className="flex flex-col ml-8">
+          <div className="h-10">文本 Text</div>
+          <div className="h-10">覆盖层 Overlays</div>
+          <div className="h-10">按钮悬停 Button Hovers</div>
+          <div className="h-10">标记 Tags</div>
+          <div className="h-10">主色 Primary Color</div>
+          <div className="h-10">次要亮色 Secondary Tint</div>
+          <div className="h-10">标签 Labels</div>
+          <div className="h-10">背景 Backgrounds</div>
+        </div>
+        <div className="flex items-center mt-auto">
+          {/* <div className="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center">
+            
+          </div> */}
+          <span className="text-gray-700 font-bold ml-8">深色模式</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div className="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+  <svg className="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+  </svg>
+  <span className="sr-only">提示</span>
+  <div>
+    当切换到深色模式（Dark Mode）时，通常意味着要将这些权重的应用顺序颠倒过来，比如，原先在浅色模式下使用 100（最浅）的地方，在深色模式下可能会对应使用 800（较深）的颜色。
+  </div>
+</div>
+
+<div  class="relative max-w-2/3 p-6 mx-auto my-6 bg-white border border-green-500 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <div class="absolute top-[-15px] left-1/2 !translate-x-[-50%] text-xl !text-center px-2 font-bold tracking-tight bg-white dark:bg-black !text-orange-500 dark:text-white">小贴士</div>
+    - **针对背景、按钮或标签**： 建议使用 100-300 范围的较浅权重。
+    - **针对文本、高亮、标签和标题**： 建议使用 300-600 范围的标准（或中等）权重。
+    - **针对标题、背景和按钮悬停效果**： 建议使用 500-800 范围的较深权重。
+</div>
+
+## 使用颜色对比
+
+在不同组件之间使用恰当的对比度，可确保它们清晰可见。
+
+对比度可以通过调整单一颜色的不透明度和（颜色）权重来实现。应避免使用过于接近的（不透明度或权重）值。
+
+对比也可以产生于两种不同颜色之间，以及它们如何并置（搭配）。应选用那些搭配使用时易于区分的颜色组合。
+
+有一个检查网站对比度是否足够的小技巧：以灰度模式查看网站。
+
+### Web 可访问性与对比度
+
+《Web 内容可访问性指南》（WCAG）2.0 提供了最佳实践指导，旨在确保前景文字与背景色之间有足够的对比度。这是通过一个具体的对比度比率标准来实现的。所需达到的比率值会根据相关文本的字号大小和字体粗细（字重）而有所不同。
+
+两种颜色之间的亮度差异用一个比率来表示，这个比率的范围从 1:1（能达到的最低对比度，比如白底配白字）一直到 21:1（能达到的最高对比度，比如白底配黑字，或者反过来黑底配白字）。
+
+通常，WCAG 设立的最低对比度比率标准为 4.5:1。
+
+![](/assets/contrast_example.png)
+
+## 创建自己的色彩方案
+
+配色方案是构建样式指南的第一步。这些颜色随后将作为创建按钮、标题、链接和内容等视觉元素时的参考依据。
+
+一个有效的配色方案包含以下要素：
+- 挑选主色、辅助色等。
+- 设定用于常规文本的基础色（如白色、黑色）。
+- 为每种颜色定义不同的颜色权重（色阶）。
+- 提供每种颜色的使用说明。
+
+我们还将在后续中加入一份使用指南，说明如何将这些颜色应用于文本、按钮和组件。
+
+### 颜色选择
+使用三色组合方案时，选择紫色、绿色和橙色分别作为主色、辅助色和第三色是不错的选择。为文本选择白色或黑色作为基础色。
+
+### 颜色权重
+
+定义好颜色及其对应的权重和 HEX 值，将有助于你将来正确地选择和使用它们。
+
+![](/assets/colors_weight_for_schema.png)
