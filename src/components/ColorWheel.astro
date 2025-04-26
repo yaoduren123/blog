@@ -15,7 +15,7 @@ const colors = [
   { name: '红紫', fill: '#ec4899', angle: 330 }, // Red-Violet
 ];
 
-const calculatePathData = (color) => {
+const calculatePathData = (color: { angle: number }) => {
   const startAngle = color.angle;
   const endAngle = color.angle + 30; // Each segment is 30 degrees
   const radius = 80; // Outer radius
