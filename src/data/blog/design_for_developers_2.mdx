@@ -1,0 +1,232 @@
+---
+author: 若浅谈科技
+pubDatetime: 2025-04-25 14:09:35
+title: 写给开发者的设计指南（二）—— 排版篇
+featured: true
+draft: false
+tags:
+  - 网站开发
+  - UI 设计
+coverImg: /assets/colors.png
+description:
+  基本设计规则与公式：打造美观组件、色彩与排版的实用指南
+---
+import Preface from "@/components/ui/Preface.astro";
+import Definition from "@/components/ui/Definition.astro";
+import DosDonts from "@/components/ui/DosDonts.astro";
+import DoItem from "@/components/ui/DoItem.astro";
+import DontItem from "@/components/ui/DontItem.astro";
+
+<Preface>
+  
+理解排版有助于我们为标题、段落、按钮等元素有效地运用字体和字号。我们将涵盖：
+- 字型与字体 (Typefaces and fonts)
+- 衬线字体与无衬线字体 (Serif and sans serif)
+- 粗体、斜体、下划线和大写 (Bold, italics, underlines and caps)
+- 字间距和行高 (Letter spacing and line height)
+- 文本颜色和对比度 (Text color and contrast)
+- 字号与标题规范 (Sizing fonts and headers)
+- 字重 (Font weights)
+- 易认性与易读性 (Legibility & readability)
+- 信息层级 (Hierarchy)
+
+完成本节学习后，您将能够在排版方面做到以下几点：
+
+- 创建您自己的排版规范 (Create your own typography schema)
+- 选择搭配协调的字体 (Select fonts that work together)
+- 识别不恰当的字体用法 (Recognise ineffective use of font)
+- 懂得如何运用不同的字体 (Understand how to use varied font)
+
+</Preface>
+
+## 字型与字体 (Typefaces and fonts)
+
+<div class="flex justify-center gap-4">
+    <div class="w-1/2">
+        <Definition title="字型 (Typeface)" className="h-full">
+        字型是指一组相关的字体的集合。 
+
+        在创建网站或应用程序时，我们通常会选择一到两种字型，一种用于标题，一种用于段落。
+
+        在 CSS 中，我们将此称为 font-family（字体族）。
+        </Definition>
+    </div>
+    <div class="w-1/2">
+        <Definition title="字体 (Font)" className="h-full">
+        字体是隶属于特定字型的一种具体样式。 这些样式可包含字重 (weights)、斜体 (italics) 等等。
+
+        如今，每种字型通常都有几十种不同的字体变体。例如，单是字重 (weights) 就可以涵盖从细体 (Thin)、亮体/细体 (Light)、常规 (Regular) 到粗体 (Bold) 和黑体/特粗 (Black) 等多种级别。
+        </Definition>
+    </div>
+</div>
+
+Roboto 是一种常见的字型，被很多网站所采用。 但鉴于其使用过于普遍，为了营造更独特的观感，推荐考虑使用 Open Sans 等其他字型。
+
+![](/assets/type.png)
+
+## 衬线字体与无衬线字体 (Serif and sans serif)
+字体主要分为两大类：衬线体 (Serif) 和无衬线体 (Sans Serif)。 
+
+衬线体在字母笔画的末端有装饰性的笔画（常被称为“衬线脚”或“字脚”），而无衬线体（“Sans”意为“无”）则没有这种装饰。
+
+<div class="flex justify-center gap-4">
+    <div class="w-1/2">
+        <Definition title="衬线体 (Serif)" className="h-full">
+        ![](/assets/serifs.png)
+        </Definition>
+    </div>
+    <div class="w-1/2">
+        <Definition title="无衬线体 (san-Serif)" className="h-full">
+        ![](/assets/san-serifs.png)
+        </Definition>
+    </div>
+</div>
+
+在网页和应用设计中，无衬线字体因其易读性而更受青睐。 不过也有例外，比如用在醒目的首屏大图 (Hero Banner) 中的大标题或装饰文字上。 总的来说，只要条件允许，就应该首选无衬线字体。
+
+<DosDonts type="do">
+  <div class="flex gap-4 ">
+    <div class="border-r-2 pr-4">
+        <DoItem> 将衬线字体用于标题文本</DoItem>
+        <DoItem> 将衬线字体用于首屏（Hero）文本</DoItem>
+        <DoItem> 将衬线字体用于较大字号的文本</DoItem>
+    </div>
+    <div>
+        <DoItem> 将段落设置为使用无衬线字体</DoItem>
+        <DoItem> 将标签中的小字号文本设置为使用无衬线字体</DoItem>
+        <DoItem> 移动应用程序应使用无衬线字体</DoItem>
+    </div>
+  </div>
+  
+</DosDonts>
+
+## 粗体(Bold)
+
+在网页和应用设计中，我们推荐只对段落里的关键部分文字加粗，比如链接、需要特别强调的信息或警告内容。 如果滥用粗体，会让句子乃至整个网站显得过于拥挤和混乱，给用户带来负担。 
+
+不过，在一些情况下使用粗体是很有帮助的，例如：字号较小时、用在按钮上，或者当文字背景的对比度很高时。
+
+<div class="flex justify-center gap-4">
+    <div class="w-1/2">
+        <DosDonts type="do">
+            <DoItem> 在使用粗体时，建议限制数量，最多用在一两处关键地方</DoItem>
+            粗体常用于区分普通文本和链接，例如在登录界面，可以将“登录”按钮或文字加粗，而“忘记密码”这类次要链接则不必加粗。
+        </DosDonts>
+    </div>
+    <div class="w-1/2">
+        <DosDonts type="dont">
+            <DontItem> 不要在文本中过于频繁地使用粗体。</DontItem>
+            如果页面上加粗的内容过多，无论是链接还是普通文本，都会冲淡强调的效果，降低信息的重要性，甚至可能让用户觉得信息混乱、难以承受。
+        </DosDonts>
+    </div>
+</div>
+
+## 斜体(Italics)
+
+斜体的主要用途一般是展示引言、标注引用来源，或在段落中强调某句话，让它更醒目。 
+
+但总的来说，应尽量少用斜体。特别是在标签和按钮这类元素上，务必使用常规（非斜体）的文本样式。 
+
+<div class="flex justify-center gap-4">
+    <div class="w-1/2">
+        <DosDonts type="do">
+            斜体可用于强调某个观点、感受或表达方式，或为文本增添特色。
+            
+            <DoItem> 突出显示某个单独的元素，使其醒目。</DoItem>
+            <DoItem> 引用名言或展示客户评价/推荐语时。</DoItem>
+        </DosDonts>
+    </div>
+    <div class="w-1/2">
+        <DosDonts type="dont">
+            整段使用斜体会非常难以阅读，并可能让你想要传达的信息丢失。
+            <DontItem> 在按钮上使用斜体</DontItem>
+            <DontItem> 对每一行/所有文本都使用斜体</DontItem>
+            <DontItem> 使用斜体链接，它们难以辨识</DontItem>
+        </DosDonts>
+    </div>
+</div>
+
+## 下划线(Underlines)
+
+在互联网发展的早期，文本下划线主要就是超链接的标志。 
+
+而现在，设计上更倾向于使用下划线来强调重要的文字内容。 至于超链接本身，如今则更多地通过不同的文本颜色或字重变化来加以区分。
+
+此外，还有多种不同的下划线样式可供选用，它们能为重要元素增添创意，或者作为鼠标悬停在超链接上时的视觉效果。
+
+### 下划线的不同种类
+
+<div class="flex gap-5">
+    <div class="border-green-300 border-1 p-2 w-1/4">
+        <p class="underline text-center text-3xl">默认下划线</p>
+    </div>
+    <div class="border-green-300 border-1 p-2 w-1/4">
+        <p class="text-center text-3xl" style="text-decoration: double underline">双下划线</p>
+    </div>
+    <div class="border-green-300 border-1 p-2 w-1/4">
+        <p class="text-center text-3xl" style="text-decoration: dotted underline">点下划线</p>
+    </div>
+    <div class="border-green-300 border-1 p-2 w-1/4">
+        <p class="text-center text-3xl" style="text-decoration: wavy underline">波浪下划线</p>
+    </div>
+</div>
+
+<div class="flex flex-wrap gap-4">
+    <div class="w-[calc(50%-0.5rem)]">
+        <DosDonts type="do">
+            为了达到更好的视觉效果，建议为超链接设置不同的颜色，而将下划线主要用于强调段落中的<span class="underline">核心语句</span>。
+            <DoItem> 使用下划线来强调文本。</DoItem>
+        </DosDonts>
+    </div>
+    <div class="w-[calc(50%-0.5rem)]" >
+        <DosDonts type="do">
+            对于页面上的超链接，推荐的做法是仅在鼠标悬停时才显示下划线
+            <DoItem> 使用下划线作为超链接的悬停效果</DoItem>
+        </DosDonts>
+    </div>
+    <div class="w-[calc(50%-0.5rem)]">
+        <DosDonts type="dont">
+            在像维基百科这样的一些网站上，单个段落中可能会有许多超链接，这会让人感到信息过载。
+            <DontItem> 默认给所有超链接加上下划线（应优先考虑颜色区分，悬停时再加下划线）。</DontItem>
+        </DosDonts>
+    </div>
+    <div class="w-[calc(50%-0.5rem)]">
+        <DosDonts type="dont">
+            <DontItem> 在大号字体上滥用下划线</DontItem>
+        </DosDonts>
+    </div>
+</div>
+
+## 大写(Capitalization)
+
+运用全部大写是吸引用户关注关键文字的一种方式。 
+
+例如，在设计博客或信息量大的页面时，标题部分可以采用全部大写，但段落正文则不宜使用，以免内容显得过于拥挤或让用户难以阅读。 
+
+![大写](/assets/CAPS_title.png)
+
+不过，在按钮、标签、即时提示（toasts）这类界面组件上，用全部大写来传达重要信息或警示是完全可以接受的。
+
+<div class="flex items-center gap-4 my-6">
+  <button type="button" class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium text-lg px-8 py-3 focus:outline-none uppercase">LOGIN</button>
+  
+  <button type="button" class="text-white bg-cyan-500 hover:bg-cyan-600 focus:ring-4 focus:ring-cyan-300 font-medium text-sm px-5 py-2 focus:outline-none uppercase">SMALL LABEL</button>
+  
+  <button type="button" class="text-white bg-pink-500 hover:bg-pink-600 focus:ring-4 focus:ring-pink-300 font-medium text-sm px-5 py-2 focus:outline-none uppercase">ATTENTION</button>
+</div>
+
+<div class="flex justify-center gap-4">
+    <div class="w-1/2">
+        <DosDonts type="do">            
+            <DoItem> 应考虑将部分标题或头部文本（headers and titles）大写，使其更突出。</DoItem>
+            <DoItem> 可偶尔将按钮或标签大写，以强调或吸引注意。</DoItem>
+            <DoItem> 当需要用户特别注意警报或警告信息时（例如，在进行删除操作前发出警告），使用全部大写是一种有效方式，比如直接使用大写的“警告”字样。 可以将这种全部大写的方式用于某个关键元素上，使其从周围内容中脱颖而出。</DoItem>
+        </DosDonts>
+    </div>
+    <div class="w-1/2">
+        <DosDonts type="dont">
+            用全部大写书写的完整句子会显得不专业
+            <DontItem> 不要对整个句子使用全部大写</DontItem>
+        </DosDonts>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+---
+export interface Props {
+  type: 'do' | 'dont';
+  title?: string;
+}
+
+const { type, title } = Astro.props;
+
+const isDoType = type === 'do';
+const borderColor = isDoType ? 'border-emerald-500' : 'border-red-500';
+const textColor = isDoType ? 'text-emerald-600' : 'text-red-600';
+// const bgColor = isDoType ? 'bg-emerald-50' : 'bg-red-50';
+// const darkBgColor = isDoType ? 'dark:bg-emerald-950/30' : 'dark:bg-red-950/30';
+const darkTextColor = isDoType ? 'dark:text-emerald-400' : 'dark:text-red-400';
+
+const defaultTitle = isDoType ? '建议小贴士' : "不要这样做";
+const displayTitle = title || defaultTitle;
+---
+
+<div class={`relative h-full p-4 mt-8 mb-4 rounded-lg border-2 ${borderColor}`}>
+  <div class={`absolute -top-5 left-1/2 transform !-translate-x-1/2 px-4 py-1 font-bold text-xl  ${textColor} ${darkTextColor} bg-white dark:bg-gray-900`}>
+    {displayTitle}
+  </div>
+  <div class="pt-2 text-sm">
+    <slot />
+  </div>
+</div>
