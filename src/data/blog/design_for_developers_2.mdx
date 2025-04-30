@@ -1,6 +1,6 @@
 ---
 author: 若浅谈科技
-pubDatetime: 2025-04-25 14:09:35
+pubDatetime: 2025-04-29 14:09:35
 title: 写给开发者的设计指南（二）—— 排版篇
 featured: true
 draft: false
@@ -226,7 +226,138 @@ Roboto 是一种常见的字型，被很多网站所采用。 但鉴于其使用
     <div class="w-1/2">
         <DosDonts type="dont">
             用全部大写书写的完整句子会显得不专业
-            <DontItem> 不要对整个句子使用全部大写</DontItem>
+            <DontItem> 对整个句子使用全部大写</DontItem>
+        </DosDonts>
+    </div>
+</div>
+
+## 字间距(Letter Spacing)
+
+<Definition title="字间距">
+字母间距，就是字母与字母之间的距离。
+</Definition>
+
+一般来说，对于普通大小的文字，字母间距通常无需调整。 
+
+但是，当字体变得很大时，就应该考虑调整字母间距了。基本原则是：字号越大，字母间距反而应该适当缩小。 特别适合调整字母间距的场景有：
+- 页面的“视觉焦点”区域 (Hero section)
+- 网站横幅或广告条 (Banners)
+- 醒目的大标题 (Large titles)
+- 各级内容标题 (Headings)
+- 本身就采用大号字体设计的文本 (Large font families) 
+
+调整间距有助于提升大号文字的可读性，同时也能为页面上的Banners、标题其他元素腾出更多空间。
+
+<div class="flex justify-center gap-4">
+    <div class="w-1/2">
+        <DosDonts type="do">            
+            <DoItem> 当字号超过 64px 时，建议适度减小字母间距（例如设为 -0.025em 或 -1px）</DoItem>
+            <DoItem> 确保整个设计中的字母间距应用规则保持一致。</DoItem>
+            ![字间距适当](/assets/large_title_spacing2.png)
+        </DosDonts>
+    </div>
+    <div class="w-1/2">
+        <DosDonts type="dont">
+            <DontItem> 让标题的字母间距过大（间隔太远）</DontItem>
+            <DontItem> 将字母间距缩减到字母之间没有空隙的程度</DontItem>
+            ![字间距错误](/assets/large_title_spacing2.png)
+        </DosDonts>
+    </div>
+</div>
+
+## 行高(Line Height)
+
+<Definition title="行高">
+行距（Leading）是排版术语，指文本行与行之间的高度（即行高 Line Height）
+</Definition>
+
+合适的行高设置，应该让段落文字有更舒适的呼吸空间（行距稍大），而标题则可以相对紧凑（行距稍小），这样整体视觉效果更佳，阅读也更轻松。 
+
+如果行距设置不当（过大或过小），内容看起来就会显得松散或者拥挤不堪，不仅影响阅读连贯性，也容易让用户失去阅读的耐心。 
+
+通常，软件默认的行高会随着字号的增大而按比例增加。
+
+因此，我们建议：当您增大字号时，应相应地调小行高值。
+
+具体调整时，请考虑以下几个方面：
+- 字号大小：字号越大，通常需要的（相对）行距就越小。
+- 文本行长度：文本行越长，为了方便眼睛回行，通常需要设置更大的行距。
+- 文本密度/量：在一个区域内文本量越大、越密集，可能适合采用相对较小的行距，以保持版面的紧凑感。
+- 文本功能：大部分标题（Headlines）所需的行距应该比正文段落要小。
+
+<div class="flex justify-center gap-4">
+    <div class="w-1/2">
+        <DosDonts type="do">            
+            <DoItem> 将（标题/大号文本的）行高减小到 1.15 左右</DoItem>
+            <DoItem> 将段落正文的行高设置为 1.5。</DoItem>
+        </DosDonts>
+    </div>
+    <div class="w-1/2">
+        <DosDonts type="dont">
+            <DontItem> 为大号文本设置大于 1.25 的行高</DontItem>
+            <DontItem> 为段落设置大于 1.75 的行高</DontItem>
+        </DosDonts>
+    </div>
+</div>
+
+## 字体(Font)
+
+设计网页时，务必确保字体大小在任何设备和屏幕尺寸上都清晰易读。 虽然没有绝对“理想”或“完美”的字号标准，但从 16px 开始通常是个不错的选择。然后，你可以根据你选用的具体字体和网站的整体风格来灵活调整。
+
+比如，在电脑等大屏幕上，把字号增加到 18px 或 24px 也是常见的做法。 要记住，不同字体的特性差异很大。有些字体即使字号小也容易看清，有些则不行。选择字号时，还应考虑以下几点：
+
+- **页面文本内容的多少**：如果页面上有大量文字，字号可能需要大一些，才方便阅读。
+- **目标用户群体**：如果网站主要是给老年人看的，那么采用更大的字号会更合适。
+- **网站的整体视觉风格**：如果网站设计中包含了很多图片、视频等视觉元素，为了让文字不被忽略，也可能需要把字号调大一些。
+
+### 字体放大（font scale）
+
+当你需要设定 H1、H2 等各级标题的字号时，推荐运用模块化比例（Modular Scale）这套系统来计算。 它建立在和谐悦目的尺寸比例之上，能帮你轻松快捷地找到恰当的像素（px）数值。
+
+![模块化比例](/assets/header_font_size.png)
+
+想进一步了解模块化比例（Modular Scale）系统，以及它是如何借鉴黄金分割（Golden Selection） 原理来为标题和正文挑选最优字号方案的吗？
+
+请访问下方提供的链接:
+
+https://www.modularscale.com/
+
+### 段落字体大小
+可以先从为桌面端设定一个较大的段落字号开始，之后针对平板和移动端设备再稍微减小一些即可。
+
+![](/assets/paragraph_font_size.png)
+
+<div class="flex justify-center mb-10 gap-4">
+    <div class="w-1/2">
+        <DosDonts type="do">            
+            <DoItem> 应将正文段落的字体大小设置在 18-24 像素 (px) 之间</DoItem>
+            <DoItem> 对于较小的视口（view-ports），应将字体大小缩减 10-25%。</DoItem>
+        </DosDonts>
+    </div>
+    <div class="w-1/2">
+        <DosDonts type="dont">
+            <DontItem> 一开始就使用低于 16 像素 (px) 的小桌面字体</DontItem>
+            <DontItem> 为文本使用超过 30 像素 (px) 的过大字号</DontItem>
+        </DosDonts>
+    </div>
+</div>
+
+
+### 标题字体大小
+为了达到最佳视觉效果，标题的字号最好能让它保持在同一行而不产生换行。因此，在为较小的设备屏幕调整字号时，标题字号的缩减幅度通常很大（最高可达 50%），这与段落文字相对较小的缩减幅度（大约只需缩小 25%）形成了鲜明对比。
+![](/assets/header_font_size2.png)
+
+<div class="flex justify-center mb-10 gap-4">
+    <div class="w-1/2">
+        <DosDonts type="do">            
+            <DoItem> 应为桌面设备和平板电脑使用较大的（标题）字号</DoItem>
+            <DoItem> 对于较小的视口，应将（标题）字号缩减 10-25%。</DoItem>
+        </DosDonts>
+    </div>
+    <div class="w-1/2">
+        <DosDonts type="dont">
+            <DontItem> 将标题大小设置得与段落文本相同</DontItem>
+            <DontItem> 将标题设置得过大以至于出现换行</DontItem>
         </DosDonts>
     </div>
 </div>
