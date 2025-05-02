@@ -5,9 +5,9 @@ export const SITE = {
   desc: "个人博客",
   title: "若浅talk科技",
   ogImage: "astropaper-og.jpg",
-  lightAndDarkMode: true,
-  postPerIndex: 4,
-  postPerPage: 4,
+  lightAndDarkMode: false,
+  postPerIndex: 10,
+  postPerPage: 10,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
   showArchives: false,
   showBackButton: false, // show back button in post detail
