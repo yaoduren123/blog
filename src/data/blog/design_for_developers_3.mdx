@@ -1,0 +1,366 @@
+---
+author: 若浅谈科技
+pubDatetime: 2025-05-04 14:09:35
+title: 写给开发者的设计指南（三）—— 组件篇
+featured: true
+draft: false
+tags:
+  - 网站开发
+  - UI 设计
+coverImg: /assets/colors.png
+description:
+  基本设计规则与公式：打造美观组件、色彩与排版的实用指南
+---
+import Preface from "@/components/ui/Preface.astro";
+import Definition from "@/components/ui/Definition.astro";
+import DosDonts from "@/components/ui/DosDonts.astro";
+import DoItem from "@/components/ui/DoItem.astro";
+import DontItem from "@/components/ui/DontItem.astro";
+
+<Preface>
+组件 (Components) 是构建任何网站的基础模块。这些组件可以小而简单（例如按钮 Button），也可以大而复杂（例如轮播图 Carousel）。
+
+但不论其规模大小或复杂与否，每一个组件的设计都应被同等重视和关注。常见的组件类型包括：
+
+<div class="flex gap-4">
+  <div class="flex-1">
+    <Definition title="基础组件">
+        - 空间/间距与基本单位 (Space, base units)
+        - 网格系统 (Grids)
+        - 按钮 (Buttons)
+        - 边框 (Borders)
+        - 阴影效果 (Shadows)
+        - 图标 (Icons)
+        - 标签/文本标记 (Labels)
+        - 分隔线 (Dividers)
+    </Definition>
+  </div>
+  <div class="flex-1">
+    <Definition title="容器组件">
+        - 表单 (Forms)
+        - 徽章/标记 (Badges)
+        - 卡片式布局 (Cards)
+        - 警告框 / 轻提示 (Alerts / Toasts)
+        - 数据表格 (Tables)
+        - 面包屑导航 (Breadcrumbs)
+        - 选项卡/标签页 (Tabs)
+        - 列表视图 (Lists)
+    </Definition>
+  </div>
+</div>
+</Preface>
+
+设计组件需要考虑四个核心要素：
+
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 my-6">
+  <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+    <h5 className="text-lg font-semibold text-blue-600 dark:text-blue-400 mt-1 mb-2">可用性 (Usability)</h5>
+    <p className="text-gray-700 dark:text-gray-300">组件使用的便捷程度（有多容易使用）。</p>
+  </div>
+  
+  <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+    <h5 className="text-lg font-semibold text-green-600 dark:text-green-400 mt-1 mb-2">美观性 (Aesthetics)</h5>
+    <p className="text-gray-700 dark:text-gray-300">组件的视觉外观。</p>
+  </div>
+  
+  <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+    <h5 className="text-lg font-semibold text-purple-600 dark:text-purple-400 mt-1 mb-2">功能性 (Functionality)</h5>
+    <p className="text-gray-700 dark:text-gray-300">组件的运作方式（如何工作）。</p>
+  </div>
+  
+  <div className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+    <h5 className="text-lg font-semibold text-orange-600 dark:text-orange-400 mt-1 mb-2">无障碍性 (Accessibility)</h5>
+    <p className="text-gray-700 dark:text-gray-300">确保所有人（包括有特殊需求的用户）都能使用该组件的能力。</p>
+  </div>
+</div>
+
+## 间距（Spacing）
+
+<Definition title="间距（Spacing）">
+间距(Spacing)，有时也称为空间系统 (spatial system)，定义了元素内部、外部以及元素与元素之间的空间大小（通常以像素或其他单位衡量）。
+</Definition>
+
+虽然严格来说间距本身不是一个组件，但它对于确保所有组件拥有一致的设计至关重要。
+
+间距规范的应用体现在外边距 (margins)、内边距 (padding) 以及不同元素或区域 (sections) 间的距离 (distance) 上。
+
+建立一套可预测的间距体系，对于打造美观、专业的视觉效果至关重要。其重要性体现在：
+
+- **一致性 (Consistency)**: 让所有元素遵循相同的间距规则，可以创造出统一和谐的设计。
+- **外边距 (Margins) 和 内边距 (Padding)**: 明确界定元素边界内外的留白区域。
+- **距离 (Distance)**: 通过控制元素间的远近来建立视觉层次感，并引导用户关注焦点。
+- **无障碍性 (Accessibility)**:  合理的间距有助于提升内容的可读性和交互元素的易用性，从而确保更广泛用户的可用性。
+- **栏间距 (Gutters)**: 特指在网格布局 (grid system) 中，列与列之间的空白区域。
+
+如果你对使用多少留白 (white space) 拿不准，不妨在设计之初大胆使用较为宽裕的留白，然后逐步缩减，直至找到你认为最合适的平衡点。 
+
+要知道，从过多的留白中进行删减，通常比在空间不足时硬要挤出更多留白来得容易。
+
+<DosDonts type="do">
+<DoItem>在项目早期就定义好间距规范，并将设定好的标准应用于负空间 (negative spacing)、组件、排版和图标。</DoItem>
+<DoItem>在整个项目中要保持间距应用的一致性。如果一个按钮有 30 像素 (30px) 的内边距 (padding)，那么所有（同类）按钮都应该如此。</DoItem>
+</DosDonts>
+
+### 基础单位
+
+我们可以定义一个基础单位 (baseline unit)，作为规范网格 (grids)、关键线 (keylines)、内边距 (padding) 及更多元素尺寸和间距的标准。 
+
+通过统一使用这个基础单位的整数倍 (increments)，我们能保证整个设计在间距上的一致性。 常见的间距方案有 4 像素 (point) 体系和 5 像素 (point) 体系，这意味着组件的间距值会被设置为 4 的倍数（如 4, 8, 12...）或 5 的倍数（如 5, 10, 15...）
+
+![](/assets/baseline_unit_spacing.png)
+
+<DosDonts type="do">
+![](/assets/spacing_example.png)
+
+基础单位 (baseline unit) 同样可用于确定元素间的距离。 按钮与其他元素之间应保持 12 像素 (px) 的间距。
+
+所有外边距 (margins)、内边距 (paddings) 和组件间的空间 (space)，都应采用 4（像素/点）的整数倍 (increments of 4) 进行设置。
+
+</DosDonts>
+
+### 网格 (Grids) 与 列 (columns)
+
+网格 (Grids) 与 列 (columns) 的设计应遵循基于基础单位 (baseline units) 的一致间距规范。这有助于元素精确对齐和实现视觉上协调美观 (aesthetically) 的定位。
+
+网站设计中，十二列布局是一种常见做法；而在应用程序设计中，则更多采用可重复的网格结构 (repeating grid structure)。
+
+布局页面元素时，务必将它们约束在网格或列的框架内。栏间距 (gutters) 的设定也应遵循基础单位。
+
+![](/assets/12_column_design.png)
+
+<div class="flex gap-4">
+  <div class="flex-1">
+    <DosDonts type="do">
+      <DoItem>应当使用预设的列尺寸 (pre-set column sizing)，以保证元素宽度和栏间距的一致性 (uniform)。</DoItem>
+      例如，采用标准的 3 列布局，能确保元素尺寸统一，呈现整洁有序 (clean) 的外观。
+    </DosDonts>
+  </div>
+  <div class="flex-1">
+    <DosDonts type="dont">
+        <DontItem>手动随意设置单行内元素的宽度</DontItem>
+        同一行内各元素宽度不统一，容易显得混乱且不专业 (clumsy)。
+    </DosDonts>
+  </div>
+</div>
+
+## 按钮（Button）
+
+按钮 (Buttons) 是用户通过点击（或按压）来执行特定操作的界面元素。按钮的设计应当反映其对应操作的重要程度 (priority)，并以此决定其在网站或应用中的视觉突出度 (visibility)。
+
+主要有以下三种按钮类型：
+
+<div className="flex flex-col md:flex-row gap-6 my-8 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+  <div className="flex-1">
+    <div className="flex items-start gap-4">
+      <div className="flex-shrink-0 w-32 flex items-start justify-center pt-1">
+        <button className="px-6 py-3 bg-blue-500 text-white font-medium rounded hover:bg-blue-600 transition-colors">Primary</button>
+      </div>
+      <div className="flex-1 mt-[-8px]" style="line-height: 0.8">
+        <p className="!mt-0"><span className="font-semibold text-sm">主按钮 (Primary buttons)</span></p>
+        <p className="text-sm mt-1">作用：用于引导用户执行最核心、最期望完成的操作。</p>
+        <p className="text-gray-700 dark:text-gray-300 text-sm mt-1">特点：使用鲜艳的颜色，尺寸较大。</p>
+        <p className="text-sm mt-1">注意：避免在同一页面上放置多个主按钮。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div className="flex flex-col md:flex-row gap-6 my-8 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+  <div className="flex-1">
+    <div className="flex items-start gap-4">
+      <div className="flex-shrink-0 w-32 flex items-center justify-center">
+        <button className="px-6 py-2.5 bg-gray-200 text-gray-700 font-medium rounded hover:bg-gray-300 transition-colors">Secondary</button>
+      </div>
+      <div className="flex-1 mt-[-8px]" style="line-height: 0.8">
+        <p><span className="font-semibold text-sm">次级按钮 (Secondary buttons)</span></p>
+        <p className="text-sm mt-1">作用：为用户提供备选的操作路径。</p>
+        <p className="text-gray-700 dark:text-gray-300 text-sm mt-1">特点：使用更柔和的颜色，背景较浅，通常尺寸较小。</p>
+        <p className="text-sm mt-1">注意：可以与主按钮搭配使用，提供替代选项。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div className="flex flex-col md:flex-row gap-6 my-8 bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
+  <div className="flex-1">
+    <div className="flex items-start gap-4">
+      <div className="flex-shrink-0 w-32 flex items-center justify-center">
+        <button className="px-6 py-2.5 bg-transparent text-gray-700 font-medium rounded border border-gray-300 hover:bg-gray-100 transition-colors">
+          Tertiary
+        </button>
+      </div>
+      <div className="flex-1 mt-[-8px]" style="line-height: 0.8">
+        <p><span className="font-semibold text-sm">三级按钮 (Tertiary buttons)</span></p>
+        <p className="text-sm mt-1">作用：用于那些不常用或优先级较低的操作。</p>
+        <p className="text-gray-700 dark:text-gray-300 text-sm mt-1">特点：使用简单的轮廓或无背景，视觉上最不突出。</p>
+        <p className="text-sm mt-1">注意：适合用于取消操作或次要功能。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+设计按钮时，关键的考虑点包括：确保有足够的交互空间 (ample space)，让用户容易发现和点击。
+
+具体而言，这意味着文本标签周围需要有更大的内边距 (padding)，并且按钮颜色需清晰，与背景形成强烈的对比 (contrast)，使其易于识别并脱颖而出 (stand out)。
+
+![](/assets/button.png)
+
+## 边框（Border）
+
+边框 (Borders) 的主要用途是帮助区分和组织信息或内容。 它们可以应用于按钮、区域 (sections)、容器 (containers)、菜单等多种界面元素。但需注意，过度使用边框会让界面显得杂乱、压抑 (overwhelming)。
+
+<div class="flex gap-4">
+    <div class="flex-1/2">
+        <DosDonts type="do">
+            柔和 (subtle) 的边框颜色能让用户的注意力保持在内容本身。
+            <DoItem>应当通过降低边框的不透明度 (opacity) 或调整颜色（使其更柔和），让内容成为视觉焦点。</DoItem>
+        </DosDonts>
+    </div>
+    <div class="flex-1/2">
+        <DosDonts type="dont">
+            过于鲜明或突出的边框（颜色太重或对比太强）会分散用户对内容的注意力。
+            <DontItem>让边框相对于其背景过浅（难以看清）或过深（过于突兀）。</DontItem>
+        </DosDonts>
+    </div>
+</div>
+<div class="mt-8 mb-4">
+    <DosDonts type="do">
+        <div class="flex gap-4">
+            <div class="flex-1/2 border-amber-500 border-r-2">
+                当内容或区块较多时，边框能更有效地帮助进行分隔。 
+            </div>
+            <div class="flex-1/2">
+                应保持边框轻盈 (light) 和简洁 (simple)，确保克制地 (sparingly) 使用它们来分隔信息。
+            </div>
+        </div>
+        有时，仅用一条分割线 (one line) 可能比使用完整的边框盒子 (a whole border box) 效果更好。
+    </DosDonts>
+</div>
+
+<div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-sm my-8">
+  <div className="bg-white dark:bg-gray-700 p-6 rounded-lg mb-8">
+    <h4 className="text-xl font-semibold mb-2 mt-2">导航</h4>
+    <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">给元素底部添加当前激活状态的文本添加下边框 (border bottom)，以明确其当前位置</p>
+    
+    <div className="flex border-b border-gray-200 dark:border-gray-600 mb-4">
+      <div className="px-4 py-2 border-b-2 border-blue-500 font-medium">Home</div>
+      <div className="px-4 py-2 text-gray-500 dark:text-gray-400">About</div>
+      <div className="px-4 py-2 text-gray-500 dark:text-gray-400">Features</div>
+      <div className="px-4 py-2 text-gray-500 dark:text-gray-400">Contact</div>
+    </div>
+  </div>
+  
+  <div className="bg-white dark:bg-gray-700 p-6 rounded-lg mb-8">
+    <h4 className="text-xl font-semibold mb-2 mt-2">表单</h4>
+    <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">使用边框来标示当前激活状态的表单 (active forms)，或者用于聚焦上强调已获得焦点的输入框 (place focus on inputs)</p>
+    
+    <div className="flex gap-4 mb-4">
+      <input type="text" placeholder="First Name..." className="px-4 py-2 bg-gray-200 dark:bg-gray-600 rounded-md border-0 w-1/2" />
+      <input type="text" value="AI" className="px-4 py-2 bg-white dark:bg-gray-800 border border-blue-500 rounded-md w-1/2" />
+    </div>
+  </div>
+  
+  <div className="bg-white dark:bg-gray-700 p-6 rounded-lg">
+    <h4 className="text-xl font-semibold mb-2 mt-2">为边框增加圆角</h4>
+    <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">边框圆角 (Border radius) 属性可以为边框带来柔和的曲线效果 (curves)。如果你的整体设计风格倾向于平滑圆润 (uses this aesthetic)，那么也可以将圆角效果统一应用于按钮、输入框、卡片等其他组件。</p>
+    
+    <div className="flex gap-4 mb-4">
+      <input type="email" placeholder="Email Address..." className="px-4 py-2 bg-gray-200 dark:bg-gray-600 rounded-md border-0 w-1/2" />
+      <button className="px-4 py-2 bg-blue-500 text-white rounded-md w-1/2">Signup</button>
+    </div>
+  </div>
+  
+  <div className="bg-white dark:bg-gray-700 p-6 rounded-lg mt-8">
+    <h4 className="text-xl font-semibold mb-2 mt-2">无边框</h4>
+    <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">不确定的时候，就不要添加边框，永远记住"少即是多" (Less is more) 的设计原则。</p>
+    
+    <div className="flex gap-4">
+      <input type="text" placeholder="First Name..." className="px-4 py-2 border-b border-gray-300 dark:border-gray-500 focus:border-blue-500 focus:outline-none w-1/2" />
+      <input type="text" placeholder="First Name..." className="px-4 py-2 border-0 border-b border-gray-300 dark:border-gray-500 w-1/2" />
+    </div>
+  </div>
+</div>
+
+## 阴影(Shadow)
+阴影 (Shadow) 效果可应用于组件，以吸引用户的目光 (draw attention)。给元素添加阴影还能营造视觉深度，使其从背景中脱颖而出 (stand out)。 
+
+一般来说，阴影越深、越大，所呈现的层次感或深度感 (depth) 就越明显。阴影效果的添加应循序渐进 (gradually) 且程度轻微 (minimal amounts)。 
+
+此外，由于阴影本身可以起到界定元素边界 (outline the element) 的作用，你可以考虑在使用了阴影的组件上移除边框。
+
+阴影的常见应用场景包括：
+- 用于按钮的悬停状态 (Hover effects)，提示用户这是一个可交互的动作。
+- 用于标示已被激活 (active)、可供输入的表单（通常在点击后显示）。
+- 通过阴影制造元素的层叠 (Cascade) 或 重叠 (overlap) 观感，让重要元素在视觉上处于更靠前的位置。
+- 用于在视觉上分隔 (Separate) 用户界面的不同功能区域 (sections)。
+
+利用在线资源来优化你的阴影效果。
+下面这个由 Brumm 开发的网站是一个用于创建阴影效果的绝佳资源 (excellent resource)：
+
+https://brumm.af/shadows
+
+<div className="bg-gray-100 dark:bg-gray-800 p-8 rounded-lg my-8 relative overflow-hidden">
+  
+  <h5 className="text-2xl font-bold mb-6">通过阴影增加深度感</h5>
+  
+  <p className="mb-4">添加<strong>阴影或色调</strong>到盒子背景可以强调组件。在 Y 轴上创建更暗更重的阴影并设置偏移量，将为页面增添额外的深度感。</p>
+  
+  <div className="grid grid-cols-1 gap-6 my-8">
+    <div className="flex items-center gap-6">
+      <div className="w-48 h-16 bg-white dark:bg-gray-700 flex items-center justify-center rounded">
+        <span className="text-sm">0 深度</span>
+      </div>
+      <div className="flex-1">
+        <div className="text-sm bg-gray-200 dark:bg-gray-900 px-2 py-1 rounded">
+          box-shadow: 0px 0px 0px 0px rgba(0,0,0,0);
+        </div>
+      </div>
+    </div>
+    
+    <div className="flex items-center gap-6">
+      <div className="w-48 h-16 bg-white dark:bg-gray-700 flex items-center justify-center rounded" style="box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, .15);">
+        <span className="text-sm">第1层深度</span>
+      </div>
+      <div className="flex-1">
+        <div className="text-sm bg-gray-200 dark:bg-gray-900 px-2 py-1 rounded">
+          box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, .15);
+        </div>
+      </div>
+    </div>
+    
+    <div className="flex items-center gap-6">
+      <div className="w-48 h-16 bg-white dark:bg-gray-700 flex items-center justify-center rounded" style="box-shadow: 0px 7.5px 15px 5px rgba(0, 0, 0, .45);">
+        <span className="text-sm">第2层深度</span>
+      </div>
+      <div className="flex-1">
+        <div className="text-sm bg-gray-200 dark:bg-gray-900 px-2 py-1 rounded">
+          box-shadow: 0px 7.5px 15px 5px rgba(0, 0, 0, .45);
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="flex gap-4">
+    <div class="flex-1/2">
+        <DosDonts type="do">
+            <div class="flex justify-center mb-4">
+                <div className="w-48 h-12 bg-white dark:bg-gray-700 flex items-center justify-center rounded-lg shadow-md">
+                    <span className="text-sm">柔和的阴影</span>
+                </div>
+            </div>
+            <DoItem>使用轻柔的阴影而不带边框。阴影不透明度约为0.15是很好的选择。</DoItem>
+        </DosDonts>
+    </div>
+    <div class="flex-1/2">
+        <DosDonts type="dont">
+            <div className="flex justify-center mb-4">
+                <div className="w-48 h-12 bg-white dark:bg-gray-700 flex items-center justify-center rounded-lg shadow-lg border-2 border-blue-400">
+                    <span className="text-sm">过度的阴影</span>
+                </div>
+            </div>
+            
+            <DontItem>将阴影的不透明度设置得过高，也不要与边框一起使用。</DontItem>
+        </DosDonts>
+    </div>
+</div>
