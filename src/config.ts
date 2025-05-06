@@ -1,5 +1,5 @@
 export const SITE = {
-  website: "https://blog.ruanqian.tech", // replace this with your deployed domain
+  website: "https://blog.ruoqian.tech", // replace this with your deployed domain
   author: "yaoduren123",
   profile: "",
   desc: "专注AI技术、智能体开发、提示词工程与UI设计的科技博客", 
