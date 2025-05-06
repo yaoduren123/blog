@@ -1,9 +1,9 @@
 export const SITE = {
-  website: "https://astro-blog.chinaren1314.workers.dev", // replace this with your deployed domain
+  website: "https://blog.ruanqian.tech", // replace this with your deployed domain
   author: "yaoduren123",
-  profile: "https://blog.ruanqian.tech/",
-  desc: "个人博客",
-  title: "若浅talk科技",
+  profile: "",
+  desc: "专注AI技术、智能体开发、提示词工程与UI设计的科技博客", 
+  title: "若浅talk科技 | AI技术与智能体开发 | 提示词工程与UI设计",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: false,
   postPerIndex: 10,

@@ -5,13 +5,14 @@ import sitemap from "@astrojs/sitemap";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import { SITE } from "./src/config";
+import path from "path";
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
   integrations: [
     sitemap({
-      filter: page => SITE.showArchives || !page.endsWith("/archives"),
+      filter: __page => true,
     }),
     mdx({
       syntaxHighlight: 'shiki', // 或 'shiki'
@@ -35,6 +36,14 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
+    resolve: {
+      alias: {
+        flowbite: path.resolve('./node_modules/flowbite'),
+        'flowbite/dist': path.resolve('./node_modules/flowbite/dist'),
+        'flowbite/dist/flowbite.min.css': path.resolve('./node_modules/flowbite/dist/flowbite.min.css')
+      }
+    }
+    
   },
   image: {
     // Used for all Markdown images; not configurable per-image
