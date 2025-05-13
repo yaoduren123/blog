@@ -6,18 +6,21 @@ import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import { SITE } from "./src/config";
 import path from "path";
+import remarkMermaid from 'astro-diagram/remark-mermaid';
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
   integrations: [
     sitemap({
-      filter: __page => true,
+      filter: () => true,
     }),
     mdx({
       syntaxHighlight: 'shiki', // 或 'shiki'
       remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of Contents" }]], // 添加 remark 插件
-      rehypePlugins: [], // 添加 rehype 插件
+      rehypePlugins: [
+        remarkMermaid
+      ], // 添加 rehype 插件
       remarkRehype: {}, // remark-rehype 选项
       gfm: true, // 启用 GitHub Flavored Markdown
     }),
@@ -48,11 +51,11 @@ export default defineConfig({
   image: {
     // Used for all Markdown images; not configurable per-image
     // Used for all `<Image />` and `<Picture />` components unless overridden with a prop
-    experimentalLayout: "responsive",
+    // experimentalLayout: "responsive",
   },
-  experimental: {
-    svg: true,
-    responsiveImages: true,
-    preserveScriptOrder: true,
-  },
+  // experimental: {
+  //   svg: true,
+  //   responsiveImages: true,
+  //   preserveScriptOrder: true,
+  // },
 });

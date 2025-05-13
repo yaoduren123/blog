@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind CSS 颜色心理学与使用场景</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 自定义样式 */
+        .color-swatch {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            vertical-align: middle;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .color-swatch:hover {
+            transform: scale(1.1);
+        }
+        .color-label {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 10px;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        /* 响应式设计：小屏幕上堆叠显示 */
+        @media (max-width: 768px) {
+            .table-row {
+                display: flex;
+                flex-direction: column;
+                padding: 1rem;
+                border-bottom: 1px solid #e2e8f0;
+            }
+            .table-cell {
+                margin-bottom: 0.5rem;
+                width: 100%;
+            }
+            .table-header {
+                display: none;
+            }
+        }
+        @media (min-width: 768px) {
+            .table-row {
+                display: table-row;
+            }
+            .table-cell {
+                display: table-cell;
+            }
+        }
+        /* 分类标题样式 */
+        .category-header {
+            background-color: #f3f4f6;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #374151;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding: 1rem 1.5rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-4 font-sans">
+    <div class="max-w-7xl mx-auto">
+        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Tailwind CSS 颜色心理学与使用场景</h1>
+        <div class="overflow-x-auto bg-white rounded-xl shadow-xl">
+            <table class="min-w-full border border-gray-200 rounded-lg">
+                <thead class="bg-gray-100 text-gray-700 text-lg">
+                    <tr class="table-row">
+                        <th class="p-4 border-b text-left table-cell w-1/6">颜色</th>
+                        <th class="p-4 border-b text-left table-cell w-1/4">心理学意义</th>
+                        <th class="p-4 border-b text-left table-cell w-1/6">通用组件</th>
+                        <th class="p-4 border-b text-left table-cell w-1/6">适用场景</th>
+                        <th class="p-4 border-b text-left table-cell w-1/4">使用注意事项</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 灰色系 -->
+                    <tr class="table-row category-header">
+                        <td class="p-3 border-b table-cell" colspan="5">灰色系 (Neutral Tones)</td>
+                    </tr>
+                    <tr class="table-row bg-gray-50 hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-gray-500" onclick="copyToClipboard('bg-gray-500')"></span><span class="color-label">Gray (灰色)<br>bg-gray-500</span></td>
+                        <td class="p-3 border-b table-cell">中立、平衡、冷静、正式。象征稳定和可靠性。</td>
+                        <td class="p-3 border-b table-cell">背景、边框、文本</td>
+                        <td class="p-3 border-b table-cell">企业或工具类应用，传递专业感</td>
+                        <td class="p-3 border-b table-cell">避免深灰色大面积使用，可能显得沉闷；确保对比度以符合可读性（WCAG）。</td>
+                    </tr>
+                    <tr class="table-row bg-white hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-slate-500" onclick="copyToClipboard('bg-slate-500')"></span><span class="color-label">Slate (石板灰)<br>bg-slate-500</span></td>
+                        <td class="p-3 border-b table-cell">冷静、中立、现代。冷灰色调，传递专业感和低调现代感。</td>
+                        <td class="p-3 border-b table-cell">背景、边框、辅助文本</td>
+                        <td class="p-3 border-b table-cell">科技、设计类应用，传递简约专业感</td>
+                        <td class="p-3 border-b table-cell">避免深色 Slate 大面积使用，可能显得冷漠；确保前景色对比度。</td>
+                    </tr>
+                    <tr class="table-row bg-gray-50 hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-zinc-500" onclick="copyToClipboard('bg-zinc-500')"></span><span class="color-label">Zinc (锌灰)<br>bg-zinc-500</span></td>
+                        <td class="p-3 border-b table-cell">稳定、实用、朴素。中性灰色，比 Slate 略暖，传递可靠性。</td>
+                        <td class="p-3 border-b table-cell">界面元素，如边框、按钮背景</td>
+                        <td class="p-3 border-b table-cell">企业应用或工具类产品</td>
+                        <td class="p-3 border-b table-cell">避免单一使用，可能显得单调；搭配明亮颜色提升活力。</td>
+                    </tr>
+                    <tr class="table-row bg-white hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-neutral-500" onclick="copyToClipboard('bg-neutral-500')"></span><span class="color-label">Neutral (中性色)<br>bg-neutral-500</span></td>
+                        <td class="p-3 border-b table-cell">平衡、简约、无偏见。纯粹中性色调，不引发强烈情感。</td>
+                        <td class="p-3 border-b table-cell">用于背景、边框或文本。</td>
+                        <td class="p-3 border-b table-cell">适合任何需要低调设计的场景</td>
+                        <td class="p-3 border-b table-cell">避免过于平淡，搭配其他颜色增加层次感；确保对比度。</td>
+                    </tr>
+                    <tr class="table-row bg-gray-50 hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-stone-500" onclick="copyToClipboard('bg-stone-500')"></span><span class="color-label">Stone (石色)<br>bg-stone-500</span></td>
+                        <td class="p-3 border-b table-cell">自然、坚实、温暖。带有轻微棕色调，传递稳定和接地气的感觉。</td>
+                        <td class="p-3 border-b table-cell">
+                            <div class="bg-sky-100 text-sky-800 p-3 rounded-lg mb-2">
+                                <div class="flex items-center space-x-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                                    </svg>
+                                    <span class="font-medium">天气预报</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="bg-sky-500 text-white px-3 py-1 rounded hover:bg-sky-600 transition-colors text-sm flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                    预订行程
+                                </button>
+                            </div>
+                        </td>
+                        <td class="p-3 border-b table-cell">适合建筑、农业或自然相关品牌</td>
+                        <td class="p-3 border-b table-cell">避免深色 Stone 大面积使用，可能显得沉重；搭配明亮色调平衡。</td>
+                    </tr>
+                    <!-- 暖色系 -->
+                    <tr class="table-row category-header">
+                        <td class="p-3 border-b table-cell" colspan="5">暖色系 (Warm Tones)</td>
+                    </tr>
+                    <tr class="table-row bg-white hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-red-500" onclick="copyToClipboard('bg-red-500')"></span><span class="color-label">Red (红色)<br>bg-red-500</span></td>
+                        <td class="p-3 border-b table-cell">激情、能量、警告、危险。吸引注意力，激发强烈情绪。</td>
+                        <td class="p-3 border-b table-cell">
+                            <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors mb-2">删除</button>
+                            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-2 rounded">
+                                <p class="text-sm">错误提示信息</p>
+                            </div>
+                        </td>
+                        <td class="p-3 border-b table-cell">促销活动（如“立即购买”）。</td>
+                        <td class="p-3 border-b table-cell">避免过度使用，可能引发焦虑；确保与品牌调性一致，搭配中性色平衡。</td>
+                    </tr>
+                    <tr class="table-row bg-gray-50 hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-orange-500" onclick="copyToClipboard('bg-orange-500')"></span><span class="color-label">Orange (橙色)<br>bg-orange-500</span></td>
+                        <td class="p-3 border-b table-cell">热情、友好、活力、创造力。比红色柔和，常与乐观和社交相关。</td>
+                        <td class="p-3 border-b table-cell">
+                            <button class="bg-orange-500 text-white px-6 py-2 rounded-lg hover:bg-orange-600 transition-colors mb-2 font-semibold">立即开始</button>
+                            <div class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm inline-flex items-center">
+                                <span class="mr-1">🔥</span> 热门推荐
+                            </div>
+                        </td>
+                        <td class="p-3 border-b table-cell">促销标签或强调创新的品牌</td>
+                        <td class="p-3 border-b table-cell">避免过于鲜艳，可能显得廉价；确保背景色对比度，避免视觉疲劳。</td>
+                    </tr>
+                    <tr class="table-row bg-white hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-yellow-500" onclick="copyToClipboard('bg-yellow-500')"></span><span class="color-label">Yellow (黄色)<br>bg-yellow-500</span></td>
+                        <td class="p-3 border-b table-cell">快乐、乐观、警示。吸引注意力，但也可能让人不安。</td>
+                        <td class="p-3 border-b table-cell">
+                            <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-2 rounded mb-2">
+                                <p class="text-sm">警告提示信息</p>
+                            </div>
+                            <span class="bg-yellow-500 text-black px-2 py-1 rounded text-sm font-medium">重要提醒</span>
+                        </td>
+                        <td class="p-3 border-b table-cell">暂无特定场景</td>
+                        <td class="p-3 border-b table-cell">对眼睛刺激大，建议小面积使用；注意可访问性，确保背景色对比度。</td>
+                    </tr>
+                    <tr class="table-row bg-gray-50 hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-amber-500" onclick="copyToClipboard('bg-amber-500')"></span><span class="color-label">Amber (琥珀色)<br>bg-amber-500</span></td>
+                        <td class="p-3 border-b table-cell">温暖、活力、乐观。介于黄色和橙色之间，传递热情和舒适感。</td>
+                        <td class="p-3 border-b table-cell">
+                            <div class="bg-amber-100 text-amber-800 px-4 py-2 rounded-lg mb-2 flex items-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/>
+                                </svg>
+                                <span>温暖提示</span>
+                            </div>
+                            <span class="bg-amber-200 text-amber-800 px-3 py-1 rounded-full text-sm font-medium">推荐</span>
+                        </td>
+                        <td class="p-3 border-b table-cell">适合秋季主题、食品品牌或促销活动，传递温暖和吸引力。</td>
+                        <td class="p-3 border-b table-cell">避免过于鲜艳，可能刺眼；注意与背景色对比度。</td>
+                    </tr>
+                    <tr class="table-row bg-white hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-amber-800" onclick="copyToClipboard('bg-amber-800')"></span><span class="color-label">Brown (棕色)<br>bg-amber-800</span></td>
+                        <td class="p-3 border-b table-cell">稳定、可靠、自然、温暖。常与大地和传统相关。</td>
+                        <td class="p-3 border-b table-cell"></td>
+                        <td class="p-3 border-b table-cell">适合食品、农业或手工艺品牌，传递朴实感。</td>
+                        <td class="p-3 border-b table-cell">避免大面积使用，可能沉闷；搭配明亮颜色增加活力。</td>
+                    </tr>
+                    <!-- 冷色系 -->
+                    <tr class="table-row category-header">
+                        <td class="p-3 border-b table-cell" colspan="5">冷色系 (Cool Tones)</td>
+                    </tr>
+                    <tr class="table-row bg-gray-50 hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-green-500" onclick="copyToClipboard('bg-green-500')"></span><span class="color-label">Green (绿色)<br>bg-green-500</span></td>
+                        <td class="p-3 border-b table-cell">自然、成长、安全、信任。常与健康、环保和成功相关。</td>
+                        <td class="p-3 border-b table-cell">
+                            <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors mb-2">确认</button>
+                            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-2 rounded">
+                                <p class="text-sm">操作成功提示</p>
+                            </div>
+                        </td>
+                        <td class="p-3 border-b table-cell">环保品牌或健康相关应用。</td>
+                        <td class="p-3 border-b table-cell">避免过于暗淡的绿色，可能无聊；注意文化差异（某些文化中绿色有负面含义）。</td>
+                    </tr>
+                    <tr class="table-row bg-white hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-teal-500" onclick="copyToClipboard('bg-teal-500')"></span><span class="color-label">Teal (青绿色)<br>bg-teal-500</span></td>
+                        <td class="p-3 border-b table-cell">平静、信任、创新。结合蓝色冷静和绿色自然感。</td>
+                        <td class="p-3 border-b table-cell">
+                            <button class="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 transition-colors mb-2 flex items-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                <span>开始创新</span>
+                            </button>
+                            <div class="w-full bg-teal-100 rounded-full h-2.5 mb-1">
+                                <div class="bg-teal-500 h-2.5 rounded-full" style="width: 75%"></div>
+                            </div>
+                            <span class="text-sm text-teal-600">创新进度：75%</span>
+                        </td>
+                        <td class="p-3 border-b table-cell">适合科技、医疗或创意行业品牌，传递现代感和可靠性。</td>
+                        <td class="p-3 border-b table-cell">确保与其他颜色搭配和谐，避免过于冷淡。</td>
+                    </tr>
+                    <tr class="table-row bg-gray-50 hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-blue-500" onclick="copyToClipboard('bg-blue-500')"></span><span class="color-label">Blue (蓝色)<br>bg-blue-500</span></td>
+                        <td class="p-3 border-b table-cell">信任、冷静、专业、稳定。是科技和金融行业常用颜色。</td>
+                        <td class="p-3 border-b table-cell">
+                            <nav class="bg-blue-500 text-white p-2 rounded-lg mb-2 flex items-center space-x-4">
+                                <a href="#" class="hover:text-blue-200">首页</a>
+                                <a href="#" class="hover:text-blue-200">关于</a>
+                            </nav>
+                            <a href="#" class="text-blue-500 hover:text-blue-700 underline">了解更多</a>
+                        </td>
+                        <td class="p-3 border-b table-cell">企业品牌，传递可靠性。</td>
+                        <td class="p-3 border-b table-cell">深蓝色可能保守，浅蓝色可能乏力；避免单一蓝色，搭配其他颜色增加活力。</td>
+                    </tr>
+                    <tr class="table-row bg-white hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-indigo-500" onclick="copyToClipboard('bg-indigo-500')"></span><span class="color-label">Indigo (靛蓝色)<br>bg-indigo-500</span></td>
+                        <td class="p-3 border-b table-cell">智慧、深度、信任。比蓝色深沉，常与高端和神秘感相关。</td>
+                        <td class="p-3 border-b table-cell">
+                            <div class="bg-indigo-100 rounded-lg p-4 mb-2">
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                                    </svg>
+                                    <h3 class="text-indigo-800 font-semibold">智能解决方案</h3>
+                                </div>
+                                <p class="text-indigo-600 text-sm">高端定制服务</p>
+                            </div>
+                        </td>
+                        <td class="p-3 border-b table-cell">适合高端品牌、科技产品或强调深思熟虑的场景。</td>
+                        <td class="p-3 border-b table-cell">避免过于暗沉，确保文字或元素对比度。</td>
+                    </tr>
+                    <tr class="table-row bg-gray-50 hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-lime-500" onclick="copyToClipboard('bg-lime-500')"></span><span class="color-label">Lime (酸橙绿)<br>bg-lime-500</span></td>
+                        <td class="p-3 border-b table-cell">清新、活力、青春。明亮黄绿色，传递能量和创新。</td>
+                        <td class="p-3 border-b table-cell">
+                            <button class="bg-lime-500 text-white px-4 py-2 rounded-full hover:bg-lime-600 transition-colors mb-2">开始体验</button>
+                            <span class="bg-lime-200 text-lime-800 px-3 py-1 rounded-full text-sm font-medium">新功能</span>
+                        </td>
+                        <td class="p-3 border-b table-cell">适合运动、环保或年轻化品牌，</td>
+                        <td class="p-3 border-b table-cell">小面积使用，避免视觉疲劳；确保可访问性对比度。</td>
+                    </tr>
+                    <tr class="table-row bg-white hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-emerald-500" onclick="copyToClipboard('bg-emerald-500')"></span><span class="color-label">Emerald (祖母绿)<br>bg-emerald-500</span></td>
+                        <td class="p-3 border-b table-cell">奢华、自然、和谐。深绿色，传递高端感和平静。</td>
+                        <td class="p-3 border-b table-cell">
+                            <div class="flex space-x-2 mb-2">
+                                <button class="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors flex items-center space-x-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <span>选择</span>
+                                </button>
+                                <span class="bg-emerald-100 text-emerald-800 px-3 py-2 rounded-lg flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                    </svg>
+                                    优选
+                                </span>
+                            </div>
+                        </td>
+                        <td class="p-3 border-b table-cell">适合高端品牌、珠宝或环保主题，传递优雅和信任。</td>
+                        <td class="p-3 border-b table-cell">避免过于暗沉，确保与其他元素对比；搭配金色或白色提升质感。</td>
+                    </tr>
+                    <tr class="table-row bg-gray-50 hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-cyan-500" onclick="copyToClipboard('bg-cyan-500')"></span><span class="color-label">Cyan (青色)<br>bg-cyan-500</span></td>
+                        <td class="p-3 border-b table-cell">清新、现代、科技感。介于蓝色和绿色之间，传递冷静和创新。</td>
+                        <td class="p-3 border-b table-cell">
+                            <button class="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 transition-colors mb-2 flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                                下载
+                            </button>
+                            <div class="inline-flex items-center space-x-1 text-cyan-600">
+                                <span class="text-sm">查看详情</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                        </td>
+                        <td class="p-3 border-b table-cell">适合科技、医疗或创意行业，</td>
+                        <td class="p-3 border-b table-cell">避免过于冷色调，搭配暖色平衡；注意对比度。</td>
+                    </tr>
+                    <tr class="table-row bg-white hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-sky-500" onclick="copyToClipboard('bg-sky-500')"></span><span class="color-label">Sky (天空蓝)<br>bg-sky-500</span></td>
+                        <td class="p-3 border-b table-cell">平静、开阔、信任。浅蓝色，传递轻松和友好的感觉。</td>
+                        <td class="p-3 border-b table-cell">
+                            <div class="bg-sky-100 text-sky-800 p-3 rounded-lg mb-2">
+                                <div class="flex items-center space-x-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                                    </svg>
+                                    <span class="font-medium">天气预报</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="bg-sky-500 text-white px-3 py-1 rounded hover:bg-sky-600 transition-colors text-sm flex items-center">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                    预订行程
+                                </button>
+                            </div>
+                        </td>
+                        <td class="p-3 border-b table-cell">适合教育、旅游或社交平台</td>
+                        <td class="p-3 border-b table-cell">避免过于浅淡，可能缺乏力量；确保文本可读性。</td>
+                    </tr>
+                    <!-- 紫色系 -->
+                    <tr class="table-row category-header">
+                        <td class="p-3 border-b table-cell" colspan="5">紫色系 (Purple Tones)</td>
+                    </tr>
+                    <tr class="table-row bg-gray-50 hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-purple-500" onclick="copyToClipboard('bg-purple-500')"></span><span class="color-label">Purple (紫色)<br>bg-purple-500</span></td>
+                        <td class="p-3 border-b table-cell">创意、奢华、神秘、灵性。常与艺术和高端品牌相关。</td>
+                        <td class="p-3 border-b table-cell">
+                            <button class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors mb-2 shadow-lg flex items-center justify-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                </svg>
+                                <span>专业版</span>
+                            </button>
+                            <div class="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg text-sm flex items-center">
+                                <span class="mr-1">✨</span> 高级功能
+                            </div>
+                        </td>
+                        <td class="p-3 border-b table-cell">用于创意行业、美容品牌或强调独特性。</td>
+                        <td class="p-3 border-b table-cell">避免过度使用，可能过于戏剧化；注意文化差异（某些文化中紫色与哀悼相关）。</td>
+                    </tr>
+                    <tr class="table-row bg-white hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-pink-500" onclick="copyToClipboard('bg-pink-500')"></span><span class="color-label">Pink (粉色)<br>bg-pink-500</span></td>
+                        <td class="p-3 border-b table-cell">温柔、浪漫、关怀。常与女性化、爱和温暖相关。</td>
+                        <td class="p-3 border-b table-cell">
+                            <button class="bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition-colors shadow-md flex items-center justify-center mb-2">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                                收藏
+                            </button>
+                            <div class="bg-pink-100 text-pink-800 px-3 py-1 rounded-lg text-sm inline-flex items-center">
+                                <span class="mr-1">🌟</span> 推荐内容
+                            </div>
+                        </td>
+                        <td class="p-3 border-b table-cell">适合美容、时尚或儿童相关产品，传递亲和力。</td>
+                        <td class="p-3 border-b table-cell">避免性别刻板印象，考虑目标用户文化背景；深粉色大胆，浅粉色柔和。</td>
+                    </tr>
+                    <tr class="table-row bg-gray-50 hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-violet-500" onclick="copyToClipboard('bg-violet-500')"></span><span class="color-label">Violet (紫罗兰)<br>bg-violet-500</span></td>
+                        <td class="p-3 border-b table-cell">创意、灵性、优雅。柔和紫色，传递艺术感和独特性。</td>
+                        <td class="p-3 border-b table-cell">
+                            <div class="bg-violet-500 text-white p-2 rounded-lg shadow-md mb-2 flex items-center justify-between">
+                                <span class="font-medium">艺术展览</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <span class="text-violet-600 hover:text-violet-800 cursor-pointer text-sm flex items-center">
+                                浏览作品集
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </span>
+                        </td>
+                        <td class="p-3 border-b table-cell">适合艺术、美容或女性化品牌，用于强调创意元素。</td>
+                        <td class="p-3 border-b table-cell">避免过度使用，可能过于戏剧化；注意文化差异。</td>
+                    </tr>
+                    <tr class="table-row bg-white hover:bg-gray-100">
+                        <td class="p-3 border-b table-cell"><span class="color-swatch bg-fuchsia-500" onclick="copyToClipboard('bg-fuchsia-500')"></span><span class="color-label">Fuchsia (紫红色)<br>bg-fuchsia-500</span></td>
+                        <td class="p-3 border-b table-cell">大胆、热情、浪漫。鲜艳粉紫色，传递自信和吸引力。</td>
+                        <td class="p-3 border-b table-cell">
+                            <button class="bg-fuchsia-500 text-white px-4 py-2 rounded-lg hover:bg-fuchsia-600 transition-colors mb-2 flex items-center">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                                </svg>
+                                订阅提醒
+                            </button>
+                            <div class="bg-fuchsia-100 text-fuchsia-800 px-3 py-1 rounded-full text-sm inline-flex items-center">
+                                <span class="mr-1">🎉</span> 新品上市
+                            </div>
+                        </td>
+                        <td class="p-3 border-b table-cell">适合时尚、娱乐或年轻化品牌，用于吸引注意力的元素。</td>
+                        <td class="p-3 border-b table-cell">小面积使用，避免视觉冲击过强；注意性别刻板印象和文化背景。</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        // 复制颜色类名到剪贴板
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(`已复制: ${text}`);
+            }, () => {
+                alert('复制失败，请手动复制');
+            });
+        }
+    </script>
+</body>
+</html>

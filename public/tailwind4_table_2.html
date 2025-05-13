@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>色彩心理学与 Tailwind CSS 调色板 - 优化迭代</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
+                        'heading': ['Poppins', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Helvetica Neue"', 'Arial', '"Noto Sans"', 'sans-serif', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Segoe UI Symbol"', '"Noto Color Emoji"'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+        /* Custom styles for visual components */
+        .component-example > * {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+         .component-example {
+             display: flex;
+             flex-wrap: wrap;
+             align-items: center;
+             justify-content: center;
+             gap: 6px;
+         }
+
+        /* Table row hover and zebra striping */
+        tbody tr {
+            transition: background-color 0.15s ease-in-out;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9fafb; /* slate-50 */
+        }
+        tbody tr:hover {
+            background-color: #f1f5f9; /* slate-100 */
+        }
+
+        /* Style for items within Applicable Industries and Components/Elements cells */
+        .scenario-item {
+             display: inline-block;
+             font-size: 0.875rem; /* text-sm */
+             color: #334155; /* slate-700 */
+             line-height: 1.5;
+        }
+         .scenario-item:not(:last-child) {
+             margin-right: 6px; /* Reduced for compactness */
+             padding-right: 6px; /* Reduced for compactness */
+             border-right: 1px solid #cbd5e1; /* Thinner border for compactness */
+         }
+
+         /* Style for the Component Example column */
+         .component-example-cell {
+             background-color: #f8fafc; /* slate-50 */
+         }
+          /* Table header font adjustment */
+          .table-header-text {
+              font-size: 1rem; /* text-base */
+              font-weight: 600;
+              letter-spacing: 0.05em;
+          }
+
+          /* Style for the color swatch */
+          .color-swatch {
+              display: inline-block;
+              width: 18px;
+              height: 18px;
+              margin-right: 10px;
+              vertical-align: middle;
+              border-radius: 4px;
+              border: 1px solid #cbd5e1; /* slate-300 */
+              box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+          }
+          
+    </style>
+</head>
+<body class="bg-slate-50 p-8 font-sans">
+
+    <div class="max-w-7xl mx-auto bg-white shadow-xl rounded-xl overflow-hidden border border-slate-200">
+
+        <div class="p-8 text-center bg-gradient-to-b from-white to-slate-50">
+            <h1 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4 font-heading">色彩心理学与 Tailwind CSS 调色板</h1>
+            <p class="text-slate-600 mb-8 max-w-3xl mx-auto">
+                了解 Tailwind CSS 默认调色板中每种颜色的心理学意义，以及它们在不同场景下的应用和视觉组件示例。
+            </p>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-slate-200 table-fixed">
+                <thead class="bg-slate-800 text-white">
+                    <tr>
+                        <th scope="col" class="px-4 py-4 text-left uppercase tracking-wider table-header-text font-heading">
+                            颜色名称
+                        </th>
+                        <th scope="col" class="px-4 py-4 text-left uppercase tracking-wider table-header-text font-heading">
+                            心理学意义
+                        </th>
+                        <th scope="col" class="px-4 py-4 text-left uppercase tracking-wider table-header-text font-heading">
+                            适用行业
+                        </th>
+                         <th scope="col" class="px-4 py-4 text-left uppercase tracking-wider table-header-text font-heading">
+                            组件/元素
+                        </th>
+                        <th scope="col" class="px-4 py-4 text-center uppercase tracking-wider table-header-text w-1/4 font-heading">
+                            组件示例
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-slate-200">
+                    <tr class="border-l-4 border-l-slate-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-slate-500"></span> 石板灰 (Slate)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-slate-700">
+                            代表沉稳、正式、专业、坚固和现代感。
+                        </td>
+                         <td class="px-4 py-3 text-base text-slate-700">
+                             <span class="scenario-item">商务</span>
+                             <span class="scenario-item">科技</span>
+                             <span class="scenario-item">工业</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-slate-700">
+                            <span class="scenario-item">背景</span>
+                            <span class="scenario-item">边框</span>
+                            <span class="scenario-item">文字</span>
+                            <span class="scenario-item">基础UI元素</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-slate-700 component-example-cell text-center">
+                            <div class="component-example">
+                                <div class="p-2 rounded-md bg-slate-100 border border-slate-300 text-slate-800 text-xs">示例</div>
+                                <span class="text-slate-600 text-xs">示例</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="border-l-4 border-l-slate-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-gray-500"></span> 灰色 (Gray)
+                        </td>
+                         <td class="px-4 py-3 text-sm text-gray-700">
+                            象征中立、平衡、稳定、保守和实用。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">通用</span>
+                             <span class="scenario-item">新闻</span>
+                             <span class="scenario-item">文档</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">分隔线</span>
+                            <span class="scenario-item">禁用状态</span>
+                            <span class="scenario-item">辅助文本</span>
+                            <span class="scenario-item">边框</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                <div class="w-12 h-1 bg-gray-300 rounded"></div>
+                                <button class="bg-gray-400 text-gray-800 px-3 py-1 rounded text-xs opacity-50 cursor-not-allowed">禁用</button>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-slate-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-zinc-500"></span> 锌灰色 (Zinc)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                            带有工业感、实用、坚固和科技的心理联想。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">硬件产品</span>
+                             <span class="scenario-item">工业设计</span>
+                             <span class="scenario-item">科技</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">产品卡片背景</span>
+                            <span class="scenario-item">代码块背景</span>
+                            <span class="scenario-item">设置界面</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                 <div class="p-2 rounded-md bg-zinc-100 border border-zinc-300 text-zinc-800 text-xs">示例</div>
+                                 <span class="text-zinc-700 text-xs">示例</span>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-slate-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-neutral-500"></span> 中性灰 (Neutral)
+                        </td>
+                         <td class="px-4 py-3 text-sm text-gray-700">
+                            呈现中性、柔和、平衡和自然的心理感受。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">内容网站</span>
+                             <span class="scenario-item">博客</span>
+                             <span class="scenario-item">电商</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">文章背景</span>
+                            <span class="scenario-item">产品描述</span>
+                            <span class="scenario-item">柔和边框</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                 <div class="p-2 rounded-md bg-neutral-100 border border-neutral-300 text-neutral-800 text-xs">示例</div>
+                                 <span class="text-neutral-600 text-xs">示例</span>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-slate-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-stone-500"></span> 石头灰 (Stone)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                            传达自然、稳定、朴实、可靠和温暖的心理意义。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">户外</span>
+                             <span class="scenario-item">旅行</span>
+                             <span class="scenario-item">手工</span>
+                             <span class="scenario-item">环保</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">地图背景</span>
+                            <span class="scenario-item">产品卡片</span>
+                            <span class="scenario-item">网站页脚</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                <div class="p-2 rounded-md bg-stone-100 border border-stone-300 text-stone-800 text-xs">示例</div>
+                                 <span class="text-stone-600 text-xs">示例</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="border-l-4 border-l-red-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-red-500"></span> 红色 (Red)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                             与热情、能量、重要、紧急、危险、爱、警告和停止相关。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">电商促销</span>
+                            <span class="scenario-item">安全警告</span>
+                            <span class="scenario-item">紧急服务</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">错误提示</span>
+                            <span class="scenario-item">警告弹窗</span>
+                            <span class="scenario-item">删除按钮</span>
+                            <span class="scenario-item">促销徽章</span>
+                            <span class="scenario-item">重要行动按钮</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                <div class="p-2 bg-red-100 border border-red-400 text-red-700 rounded-md text-xs">错误</div>
+                                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-2 rounded">
+                                    <p class="text-xs">错误提示信息</p>
+                                </div>
+                                <button class="bg-red-500 text-white px-3 py-1 rounded text-xs">删除</button>
+                                <span class="bg-red-400 text-red-900 text-xs font-bold px-2 py-0.5 rounded-full">热卖!</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="border-l-4 border-l-orange-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-orange-500"></span> 橙色 (Orange)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                            象征活力、热情、创造力、友善、可负担、鼓励行动和温暖。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">电商</span>
+                             <span class="scenario-item">食品饮料</span>
+                             <span class="scenario-item">创意服务</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">注册/订阅按钮</span>
+                            <span class="scenario-item">优惠信息</span>
+                            <span class="scenario-item">通知提示</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                <div class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-xs inline-flex items-center">
+                                    <span class="mr-1">🔥</span> 热门推荐
+                                </div>
+                                <button class="bg-orange-500 text-white px-3 py-1 rounded text-xs">立即注册</button>
+                                <span class="bg-orange-400 text-orange-900 text-xs font-bold px-2 py-0.5 rounded-full">促销!</span>
+                                <div class="p-1 bg-orange-100 border border-orange-300 text-orange-800 rounded-md text-xs">通知</div>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-amber-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-amber-500"></span> 琥珀色 (Amber)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                            代表温暖、谨慎、自然以及非紧急的警示。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">环保</span>
+                             <span class="scenario-item">农业</span>
+                             <span class="scenario-item">内容通知</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">非紧急警告横幅</span>
+                            <span class="scenario-item">活动预热提示</span>
+                            <span class="scenario-item">自然主题元素</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                             <div class="component-example">
+                                <div class="p-2 bg-amber-100 border border-amber-400 text-amber-700 rounded-md text-xs">预警提示</div>
+                             </div>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-yellow-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-yellow-500"></span> 黄色 (Yellow)
+                        </td>
+                         <td class="px-4 py-3 text-sm text-gray-700">
+                            与快乐、乐观、注意、阳光、警示和活力相关。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">儿童产品</span>
+                             <span class="scenario-item">创意服务</span>
+                             <span class="scenario-item">广告</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">高亮文本</span>
+                            <span class="scenario-item">注意图标</span>
+                            <span class="scenario-item">小范围警告</span>
+                            <span class="scenario-item">装饰元素</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                <span class="bg-yellow-300 text-yellow-900 text-xs font-bold px-2 py-0.5 rounded">文本</span>
+                                 <div class="w-6 h-6 bg-yellow-400 rounded-full text-yellow-900 flex items-center justify-center text-xs font-bold">!</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="border-l-4 border-l-lime-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-lime-500"></span> 酸橙色 (Lime)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                            传达清新、活力、健康、生机、成长、环保和新颖的心理感受。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">健康</span>
+                             <span class="scenario-item">环保</span>
+                             <span class="scenario-item">年轻品牌</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">成功提示</span>
+                            <span class="scenario-item">新功能标签</span>
+                            <span class="scenario-item">环保认证徽章</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                <div class="p-2 bg-lime-100 border border-lime-400 text-lime-700 rounded-md text-xs">成功</div>
+                                 <span class="bg-lime-500 text-white text-xs font-bold px-2 py-0.5 rounded">环保</span>
+                                 <button class="bg-lime-500 text-white px-4 py-2 rounded-full hover:bg-lime-600 transition-colors mb-2 text-xs">开始体验</button>
+                                <span class="bg-lime-200 text-lime-800 px-3 py-1 rounded-full text-xs font-medium">新功能</span>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-green-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-green-500"></span> 绿色 (Green)
+                        </td>
+                         <td class="px-4 py-3 text-sm text-gray-700">
+                            象征自然、健康、平静、安全、成长、金钱和通过。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">健康</span>
+                             <span class="scenario-item">环保</span>
+                             <span class="scenario-item">金融</span>
+                             <span class="scenario-item">安全</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">成功提示</span>
+                            <span class="scenario-item">确认按钮</span>
+                            <span class="scenario-item">在线状态</span>
+                            <span class="scenario-item">金融图表 (上涨)</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-2 rounded">
+                                    <p class="text-xs">操作成功提示</p>
+                                </div>
+                                <div class="p-2 bg-green-100 border border-green-400 text-green-700 rounded-md text-xs">操作成功!</div>
+                                <button class="bg-green-500 text-white px-3 py-1 rounded text-xs">确认</button>
+                                <span class="w-3 h-3 bg-green-500 rounded-full inline-block"></span>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-emerald-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-emerald-500"></span> 祖母绿 (Emerald)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                            代表奢华、富饶、深度、自然的宝石绿和高质量。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">奢侈品</span>
+                             <span class="scenario-item">珠宝</span>
+                             <span class="scenario-item">高端服务</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">Premium 徽章</span>
+                            <span class="scenario-item">高价值图表</span>
+                            <span class="scenario-item">证书背景</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                <span class="bg-emerald-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">优质 Premium</span>
+                                <button class="bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-600 transition-colors flex items-center space-x-2 text-xs">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                    </svg>
+                                    <span>选择</span>
+                                </button>
+                                <span class="bg-emerald-100 text-emerald-800 px-3 py-2 rounded-lg flex items-center text-xs">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                    </svg>
+                                    优选
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="border-l-4 border-l-teal-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-teal-500"></span> 青色 (Teal)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                            传达平静、平衡、专业、信任、科技和成熟的心理意义。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">科技</span>
+                             <span class="scenario-item">医疗健康</span>
+                             <span class="scenario-item">咨询服务</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">技术文档链接</span>
+                            <span class="scenario-item">医疗预约按钮</span>
+                            <span class="scenario-item">企业官网配色</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                             <div class="component-example">
+                                <button class="bg-teal-500 text-white px-4 py-2 rounded-lg hover:bg-teal-600 transition-colors mb-2 flex items-center space-x-2 text-xs">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                    </svg>
+                                    <span>开始创新</span>
+                                </button>
+                                <div class="w-full bg-teal-100 rounded-full h-2.5 mb-1">
+                                    <div class="bg-teal-500 h-2.5 rounded-full" style="width: 75%"></div>
+                                </div>
+                                <span class="text-xs text-teal-600">创新进度：75%</span>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-cyan-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-cyan-500"></span> 青色 (Cyan)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                            象征清爽、清晰、现代、科技、水、清洁和开放。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">天气应用</span>
+                             <span class="scenario-item">水产品</span>
+                             <span class="scenario-item">科技</span>
+                             <span class="scenario-item">数据可视化</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">天气背景</span>
+                            <span class="scenario-item">图表线条</span>
+                            <span class="scenario-item">链接</span>
+                            <span class="scenario-item">清洁界面元素</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                <div class="w-8 h-8 bg-cyan-300 rounded-md inline-block"></div>
+                                <button class="bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 transition-colors mb-2 flex items-center text-xs">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                    </svg>
+                                    下载
+                                </button>
+                                <div class="inline-flex items-center space-x-1 text-cyan-600 text-xs">
+                                    <span class="text-xs">查看详情</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-sky-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-sky-500"></span> 天蓝色 (Sky)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                             代表开放、平静、自由、梦想、广阔和轻快。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">旅行</span>
+                             <span class="scenario-item">航空</span>
+                             <span class="scenario-item">天气</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">旅行预订背景</span>
+                            <span class="scenario-item">天气应用头部</span>
+                            <span class="scenario-item">注册/登录页面背景</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                             <div class="component-example">
+                                <div class="bg-sky-100 text-sky-800 p-3 rounded-lg mb-2 text-xs">
+                                    <div class="flex items-center space-x-2">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                                        </svg>
+                                        <span class="font-medium">天气预报</span>
+                                    </div>
+                                </div>
+                                <div class="flex space-x-2">
+                                    <button class="bg-sky-500 text-white px-3 py-1 rounded hover:bg-sky-600 transition-colors text-xs flex items-center">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                        预订行程
+                                    </button>
+                                </div>
+                             </div>
+                        </td>
+                    </tr>
+                    <tr class="border-l-4 border-l-blue-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-blue-500"></span> 蓝色 (Blue)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                             象征信任、稳定、专业、可靠、逻辑、平静、科技，并常有男性联想。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">企业</span>
+                             <span class="scenario-item">金融</span>
+                             <span class="scenario-item">科技</span>
+                             <span class="scenario-item">教育</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">主行动按钮</span>
+                            <span class="scenario-item">链接</span>
+                            <span class="scenario-item">信任徽章</span>
+                            <span class="scenario-item">导航栏</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                <button class="bg-blue-600 text-white px-3 py-1 rounded text-xs">主要</button>
+                                <span class="bg-blue-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">可靠</span>
+                                <a href="#" class="text-blue-500 hover:text-blue-700 underline text-xs">了解更多</a>
+                                <nav class="bg-blue-500 text-white p-2 rounded-lg mb-2 flex items-center space-x-4 text-xs">
+                                    <a href="#" class="hover:text-blue-200">首页</a>
+                                    <a href="#" class="hover:text-blue-200">关于</a>
+                                </nav>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-indigo-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-indigo-500"></span> 靛蓝色 (Indigo)
+                        </td>
+                         <td class="px-4 py-3 text-sm text-gray-700">
+                             代表智慧、直觉、结构、深度、正式和神秘。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">高等教育</span>
+                             <span class="scenario-item">创意机构</span>
+                             <span class="scenario-item">冥想</span>
+                             <span class="scenario-item">艺术</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">引用块背景</span>
+                            <span class="scenario-item">作品集元素</span>
+                            <span class="scenario-item">深度内容背景</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                             <div class="component-example">
+                                <div class="p-2 rounded-md bg-indigo-100 border border-indigo-300 text-indigo-800 text-xs">引用块</div>
+                                <div class="w-8 h-8 bg-indigo-300 rounded-md inline-block"></div>
+                                <div class="flex items-center mb-2 text-xs">
+                                    <svg class="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                                    </svg>
+                                    <strong class="text-indigo-800 font-semibold">智能解决方案</strong>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-violet-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-violet-500"></span> 紫罗兰色 (Violet)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                             与创意、想象力、精神、奢华和独特相关。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">艺术</span>
+                            <span class="scenario-item">创意服务</span>
+                            <span class="scenario-item">美妆</span>
+                            <span class="scenario-item">高端</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">艺术作品集</span>
+                            <span class="scenario-item">创意按钮</span>
+                            <span class="scenario-item">独特元素</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                             <div class="component-example">
+                                <button class="bg-violet-600 text-white px-3 py-1 rounded text-xs">创意</button>
+                                 <div class="w-8 h-8 bg-violet-300 rounded-md inline-block"></div>
+                            </div>
+                            <div class="bg-violet-500 text-white p-2 rounded-lg shadow-md mb-2 flex items-center justify-between text-xs">
+                                <span class="font-medium">艺术展览</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <span class="text-violet-600 hover:text-violet-800 cursor-pointer text-xs flex items-center">
+                                浏览作品集
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                                </svg>
+                            </span>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-purple-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-purple-500"></span> 紫色 (Purple)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                             代表创意、奢华、皇室、复杂、神秘，并常有女性联想。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">时尚</span>
+                            <span class="scenario-item">美妆</span>
+                            <span class="scenario-item">创意产业</span>
+                            <span class="scenario-item">高端服务</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">优惠活动横幅 (高端)</span>
+                            <span class="scenario-item">会员等级标识</span>
+                            <span class="scenario-item">创意内容分类</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                             <div class="component-example">
+                                <button class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors mb-2 shadow-lg flex items-center justify-center text-xs">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                    </svg>
+                                    <span>专业版</span>
+                                </button>
+                                <div class="bg-purple-100 text-purple-800 px-3 py-1 rounded-lg text-xs flex items-center">
+                                    <span class="mr-1">✨</span> 高级功能
+                                </div>
+                                <span class="bg-purple-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">VIP</span>
+                            </div>
+                        </td>
+                    </tr>
+                     <tr class="border-l-4 border-l-fuchsia-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-fuchsia-500"></span> 紫红色 (Fuchsia)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                            象征活力、兴奋、热情、创意、前卫，并常有女性联想。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">时尚</span>
+                             <span class="scenario-item">娱乐</span>
+                             <span class="scenario-item">年轻文化</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">限时抢购徽章</span>
+                            <span class="scenario-item">潮流商品列表</span>
+                            <span class="scenario-item">活动宣传弹窗</span>
+                            <span class="scenario-item">强调元素</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                             <div class="component-example">
+                                <span class="bg-fuchsia-500 text-white text-xs font-bold px-2 py-0.5 rounded">热门</span>
+                                <button class="bg-fuchsia-600 text-white px-3 py-1 rounded text-xs">参加</button>
+                                 <button class="bg-fuchsia-500 text-white px-4 py-2 rounded-lg hover:bg-fuchsia-600 transition-colors mb-2 flex items-center text-xs">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+                                    </svg>
+                                    订阅提醒
+                                </button>
+                                <div class="bg-fuchsia-100 text-fuchsia-800 px-3 py-1 rounded-full text-xs inline-flex items-center">
+                                    <span class="mr-1">🎉</span> 新品上市
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="border-l-4 border-l-pink-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-pink-500"></span> 粉色 (Pink)
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700">
+                            代表温柔、浪漫、甜蜜、女性、同情、抚慰和有趣。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">女性用品</span>
+                            <span class="scenario-item">母婴产品</span>
+                            <span class="scenario-item">美妆时尚</span>
+                            <span class="scenario-item">浪漫主题</span>
+                            <span class="scenario-item">慈善 (特定)</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">产品介绍卡片</span>
+                            <span class="scenario-item">浪漫活动背景</span>
+                            <span class="scenario-item">捐款按钮 (特定主题)</span>
+                            <span class="scenario-item">柔和UI元素</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                             <div class="component-example">
+                                <button class="bg-pink-500 text-white px-3 py-1 rounded text-xs">捐款</button>
+                                 <button class="bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition-colors shadow-md flex items-center justify-center mb-2 text-xs">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                    </svg>
+                                    收藏
+                                </button>
+                                <div class="bg-pink-100 text-pink-800 px-3 py-1 rounded-lg text-xs inline-flex items-center">
+                                    <span class="mr-1">🌟</span> 推荐内容
+                                </div>
+                             </div>
+                        </td>
+                    </tr>
+                    <tr class="border-l-4 border-l-rose-400">
+                        <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">
+                            <span class="color-swatch bg-rose-500"></span> 玫瑰色 (Rose)
+                        </td>
+                         <td class="px-4 py-3 text-sm text-gray-700">
+                            象征浪漫、优雅、柔和、美丽和爱。
+                        </td>
+                        <td class="px-4 py-3 text-base text-gray-700">
+                             <span class="scenario-item">婚礼</span>
+                             <span class="scenario-item">高端美妆</span>
+                             <span class="scenario-item">珠宝</span>
+                             <span class="scenario-item">浪漫服务</span>
+                        </td>
+                         <td class="px-4 py-3 text-base text-gray-700">
+                            <span class="scenario-item">婚礼网站元素</span>
+                            <span class="scenario-item">产品详情页 (高端)</span>
+                            <span class="scenario-item">邀请函设计</span>
+                        </td>
+                        <td class="px-4 py-3 text-xs text-gray-700 component-example-cell text-center">
+                            <div class="component-example">
+                                <button class="bg-rose-500 text-white px-3 py-1 rounded text-xs">回复 RSVP</button>
+                                 <div class="w-8 h-8 bg-rose-300 rounded-md inline-block"></div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</body>
+</html>

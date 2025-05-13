@@ -1,0 +1,476 @@
+---
+author: 若浅谈科技
+pubDatetime: 2025-05-08 00:20:35
+title: AI能替代软件架构师吗
+featured: true
+draft: false
+tags:
+  - AI
+coverImg: /assets/cover.webp
+description:
+  本指南专为探索如何构建首个智能体的产品和工程团队设计，将众多客户部署中获得的见解提炼为实用且可操作的最佳实践。它包括识别有前景用例的框架、设计智能体逻辑和编排的清晰模式，以及确保您的智能体安全、可预测且有效运行的最佳实践。
+---
+![](/assets/cover.webp)
+自2022年左右至今，“AI会取代软件工程师吗？”一直是科技圈讨论的核心问题。紧随其后，产品经理、平面设计师等其他角色的命运，也成了这一问题讨论的焦点。
+
+今天，我想从另一个角度探讨这个问题:
+
+> 在不具备软件架构技能的情况下，是否有可能设计和构建一个大规模复杂的系统？
+
+至少在我看来，这个问题构成了“AI 能否取代软件工程师”的关键所在。
+
+当软件工程师担心被 AI 取代时，他们的担忧主要集中在“AI能够生成代码（而且往往是相当连贯的代码）”这一观点上。但是，生成代码仅仅是软件创建过程中的一小部分。
+
+另外，软件工程师担心的更重要的问题是:
+
+> AI 尤其是大型和小型语言模型，能否生成完整的、可运行的应用程序——或者至少能够指导某人端到端地创建这样一个系统。
+
+这个问题可以简化为：“**生成式 AI 能否取代软件架构师？**”。然而，它探讨真正的目标的是“生成式 AI 本身是否能够取代架构技能”。
+
+虽然从职责定义上来说，软件架构师是负责系统整体设计、确保各部分协同工作的专家，他们理应具备这种宏观把控和整合能力。但是，在现实的商业环境中，由于公司情况各异（比如小公司可能没有专职架构师，大公司不同部门架构职责划分也可能不同），“软件架构”这项具体的工作内容，并不一定非得由一个挂着“软件架构师”头衔的人来完成。它可能由不同的人，或者以不同的方式来实现。
+
+实际上，软件工程师和开发人员在日常的软件开发工作中，一直都在进行‘软件架构’相关的思考和实践。一位软件工程师在软件架构方面所承担的职责范围，通常与其个人的经验水平直接相关——经验越丰富，其角色重心就越会从具体的软件编码转向更高层次的软件架构设计。
+
+所以，真正重要的问题，并不一定只是——“我能否用生成式AI来编写代码，以解决某个特定的程序（或问题）？” 更核心的问题在于——我今天能否利用生成式AI来生成一个系统全面的设计蓝图？这基本上就是架构师以及其他类似角色所做的工作。
+
+归根结底，问题就变成了——
+> 软件架构师是不可替代的吗？还是说，我们距离被自动化取代，仅仅只差一个提示词的距离？
+
+所以我做了一个实验……我给一群大型语言模型（LLMs）布置了一个架构问题，想看看它们能给出什么样的方案，以及这些方案能否接近一位经验丰富的架构师的水平。
+
+结果嘛，有点出人意料……
+
+## 设置
+
+为了验证大型语言模型（LLMs）在架构设计方面的能力，我进行了一项实验。我挑选了一个真实且具有一定复杂性的案例——加密货币交易所，并要求四款顶尖的LLMs为其设计系统架构。
+
+之所以选择加密货币交易所，是因为它不像常见的电商或视频流媒体系统那样“套路化”，而是涉及到高风险交易、敏感数据保护、复杂的监管要求以及众多相互关联的模块。这类问题，正是经验丰富的软件架构师们乐于挑战的。我想看看，面对这样一个复杂的实际问题，LLMs究竟能给出怎样的解决方案，又能否达到资深架构师的水平。
+
+我解决这个问题的方法是：先提出一个引导性的问题，然后通过一系列后续的沟通和追问将一个复杂、初期定义不清的问题，逐步细化和具体化，最终得到一个清晰、可执行的方案。
+
+我这样做，是为了模拟我们作为系统架构师在设计一个系统时的典型工作流程。这个流程通常是这样展开的：
+
+<div class="flex gap-4">
+<div class="block max-w-sm p-6 bg-blue-50 rounded-lg shadow-sm hover:bg-blue-100 dark:bg-blue-800  dark:hover:bg-blue-700">
+  <h5 class="mb-2 text-xl font-bold tracking-tight text-orange-500 dark:text-white">初期沟通，需求模糊</h5>
+  <div class="font-normal text-sm text-gray-700 leading-loose dark:text-gray-400">
+  我们会与项目的各个相关方（例如客户、最终用户、业务部门等）进行初步的讨论。目的是了解各方的期望、痛点和初步设想。
+  
+  这是需求收集和利益相关者分析的早期阶段。在这个阶段，大家对系统的需求和想法往往还比较笼统、模糊，信息也常常不够完整。
+  </div>
+</div>
+<div class="block max-w-sm p-6 bg-blue-50 leading-loose  rounded-lg shadow-sm hover:bg-blue-100 dark:bg-blue-800  dark:hover:bg-blue-700">
+  <h5 class="mb-2 text-xl font-bold tracking-tight text-orange-500 dark:text-white">深入挖掘，层层解构</h5>
+  <div class="font-normal text-sm text-gray-700 leading-loose dark:text-gray-400">
+  深入研究这些初步的信息，挖掘更多的细节，就像剥洋葱一样，一层一层地揭示出系统的具体构成、不同模块之间的关联以及运作的内在逻辑和复杂性。
+  
+  这是需求分析和细化的核心阶段。架构师会运用各种方法（如用例分析、用户故事、原型设计等）来探索和明确需求。
+  </div>
+</div>
+</div>
+
+这种从宏观到微观，从模糊到具体的方式，能帮助我们更全面、准确地理解和构建整个系统。
+
+{/* - 初期沟通，需求模糊：我们会与项目的各个相关方（例如客户、最终用户、业务部门等）进行初步的讨论。这是需求收集和利益相关者分析的早期阶段。目的是了解各方的期望、痛点和初步设想。在这个阶段，大家对系统的需求和想法往往还比较笼统、模糊，信息也常常不够完整。
+- 深入挖掘，层层解构：接下来，我们会开始深入研究这些初步的信息，挖掘更多的细节，就像剥洋葱一样，一层一层地揭示出系统的具体构成、不同模块之间的关联以及运作的内在逻辑和复杂性。这是需求分析和细化的核心阶段。架构师会运用各种方法（如用例分析、用户故事、原型设计等）来探索和明确需求。 */}
+
+我凭借自己在软件架构、解决方案架构以及企业架构领域积累的经验，首先从我个人的专业视角审视了这些回答。然后，我让每个大语言模型（LLM）对它自己给出的回答进行一番"自我评估"，这个环节倒是带来了一些相当值得玩味的结果。
+
+我向每个大语言模型（LLM）都发出了相同的初始指令，后续追问的问题也完全一样，可以说大家的"起跑线"是完全相同的。在这个过程中，我没有提供任何额外的背景信息或上下文作为参考。
+
+我的提问步骤是这样的：
+
+<svg width="984" height="354" viewBox="0 0 984 354" style="fill:none;stroke:none;fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style class="text-font-style fontImports" data-font-family="Roboto">@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=block');</style><g id="items" style="isolation: isolate"><g id="blend" style="mix-blend-mode: normal"><g id="g-root-cp_1_top-1_1urs6qz1b8cidn-fill" data-item-order="-286405" transform="translate(50, 86)"></g><g id="g-root-cp_1_Number_1d14ncb1b8chl1-fill" data-item-order="-286398" transform="translate(38, 110)"><g id="cp_1_Number_1d14ncb1b8chl1-fill" stroke="none" fill="url(#gradient-76aaff-163240667)"><g><path d="M 22 22L 82 22L 82 82L 22 82ZM 82 10L 112 52L 82 94L 82 10Z"></path></g></g><g id="cp_1_Number_1d14ncb1b8chl1-fill" stroke="none" fill="url(#gradient-76aaff-163240667)"><g><path d="M 10 26C 10 23.7909 11.7909 22 14 22L 22 22L 22 90L 14 90C 11.7909 90 10 88.2091 10 86L 10 26Z"></path></g></g></g><g id="g-root-cp_2_top-2_zqam231b8cg08-fill" data-item-order="-286381" transform="translate(350, 86)"></g><g id="g-root-cp_2_Number_1_meu3or1b8chl6-fill" data-item-order="-286374" transform="translate(338, 110)"><g id="cp_2_Number_1_meu3or1b8chl6-fill" stroke="none" fill="url(#gradient-64edab-240055791)"><g><path d="M 22 22L 82 22L 82 82L 22 82ZM 82 10L 112 52L 82 94L 82 10Z"></path></g></g><g id="cp_2_Number_1_meu3or1b8chl6-fill" stroke="none" fill="url(#gradient-64edab-240055791)"><g><path d="M 10 26C 10 23.7909 11.7909 22 14 22L 22 22L 22 90L 14 90C 11.7909 90 10 88.2091 10 86L 10 26Z"></path></g></g></g><g id="g-root-cp_3_top-3_4o6ka31b8cgsl-fill" data-item-order="-286357" transform="translate(650, 86)"></g><g id="g-root-cp_3_Number_2_1qdu3vv1b8ci6f-fill" data-item-order="-286350" transform="translate(638, 110)"><defs><linearGradient id="gradient-76aaff-163240667" x2="0" y2="1"><stop offset="0" stop-color="#A7F3D0"></stop><stop offset="1" stop-color="#14B8A6"></stop></linearGradient><linearGradient id="gradient-64edab-240055791" x2="0" y2="1"><stop offset="0" stop-color="#C7D2FE"></stop><stop offset="1" stop-color="#6366F1"></stop></linearGradient><linearGradient id="gradient-bceb57-497517668" x2="0" y2="1"><stop offset="0" stop-color="#FDE68A"></stop><stop offset="1" stop-color="#F59E0B"></stop></linearGradient></defs><g id="cp_3_Number_2_1qdu3vv1b8ci6f-fill" stroke="none" fill="url(#gradient-bceb57-497517668)"><g><path d="M 22 22L 82 22L 82 82L 22 82ZM 82 10L 112 52L 82 94L 82 10Z"></path></g></g><g id="cp_3_Number_2_1qdu3vv1b8ci6f-fill" stroke="none" fill="url(#gradient-bceb57-497517668)"><g><path d="M 10 26C 10 23.7909 11.7909 22 14 22L 22 22L 22 90L 14 90C 11.7909 90 10 88.2091 10 86L 10 26Z"></path></g></g></g><g id="g-root-cp_1_bottom-1_18n6kh71b8chdu-fill" data-item-order="-286331" transform="translate(50, 200)"></g><g id="g-root-cp_2_bottom-2_zrjk8b1b8ci6k-fill" data-item-order="-286321" transform="translate(350, 200)"></g><g id="g-root-cp_3_bottom-3_mgpiy31b8cglq-fill" data-item-order="-286311" transform="translate(650, 200)"></g><g id="g-root-tx_1_zjfe3v1b8dvre-fill" data-item-order="0" transform="translate(68, 140)"><g id="tx_1_zjfe3v1b8dvre-fill" stroke="none" fill="#FFFFFF"><g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="16.26" y="34" dominant-baseline="ideographic">1</tspan></text></g></g></g><g id="g-root-tx__1lpwfmz1b8dwjl-fill" data-item-order="0" transform="translate(152, 131)"><g id="tx__1lpwfmz1b8dwjl-fill" stroke="none" fill="#0D9488"><g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="12" y="34" dominant-baseline="ideographic">构想架构方案</tspan></text></g></g></g><g id="g-root-tx__m7yvqj1b8dxcb-fill" data-item-order="0" transform="translate(452, 131)"><g id="tx__m7yvqj1b8dxcb-fill" stroke="none" fill="#4F46E5"><g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="12" y="34" dominant-baseline="ideographic">阐述特定方面</tspan></text></g></g></g><g id="g-root-tx_2_1umse231b8dx58-fill" data-item-order="0" transform="translate(368, 140)"><g id="tx_2_1umse231b8dx58-fill" stroke="none" fill="#FFFFFF"><g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="16.26" y="34" dominant-baseline="ideographic">2</tspan></text></g></g></g><g id="g-root-tx_3_qpnt4b1b8dvke-fill" data-item-order="0" transform="translate(668, 140)"><g id="tx_3_qpnt4b1b8dvke-fill" stroke="none" fill="#FFFFFF"><g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="16.26" y="34" dominant-baseline="ideographic">3</tspan></text></g></g></g><g id="g-root-tx__1hbycrv1b8dvkd-fill" data-item-order="0" transform="translate(752, 131)"><g id="tx__1hbycrv1b8dvkd-fill" stroke="none" fill="#D97706"><g><text style="font: bold 20px Roboto, sans-serif; white-space: pre;" font-weight="bold" font-size="20px" font-family="Roboto, sans-serif"><tspan x="12" y="34" dominant-baseline="ideographic">回顾并评价设计</tspan></text></g></g></g><g id="g-root-tx__de7aqz1b8dx5b-fill" data-item-order="0" transform="translate(110, 212)"><g id="tx__de7aqz1b8dx5b-fill" stroke="none" fill="#484848"><g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="12" y="31" dominant-baseline="ideographic">大模型构想系统架构</tspan></text></g></g></g><g id="g-root-tx__1uontbf1b8dw5k-fill" data-item-order="0" transform="translate(380, 212)"><g id="tx__1uontbf1b8dw5k-fill" stroke="none" fill="#484848"><g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="12" y="31" dominant-baseline="ideographic">大模型详细说明客户身份识别</tspan></text></g></g></g><g id="g-root-tx__142d9nv1b8dw5l-fill" data-item-order="0" transform="translate(704, 212)"><g id="tx__142d9nv1b8dw5l-fill" stroke="none" fill="#484848"><g><text style="font: 15px Roboto, sans-serif; white-space: pre;" font-size="15px" font-family="Roboto, sans-serif"><tspan x="12" y="31" dominant-baseline="ideographic">大模型评估其架构设计</tspan></text></g></g></g><g id="g-root-cp_1_top-1_1urs6qz1b8cidn-stroke" data-item-order="-286405" transform="translate(50, 86)"><g id="cp_1_top-1_1urs6qz1b8cidn-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 274 28L 274 124M 10 124L 10 28M 274 28L 274 26C 274 17.1634 265.8485 10 255.7931 10L 28.2069 10C 18.1515 10 10 17.1634 10 26L 10 28"></path></g></g></g><g id="g-root-cp_1_Number_1d14ncb1b8chl1-stroke" data-item-order="-286398" transform="translate(38, 110)"><g id="cp_1_Number_1d14ncb1b8chl1-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 22 22L 82 22L 82 10L 112 52L 82 94L 82 82L 22 82"></path></g></g><g id="cp_1_Number_1d14ncb1b8chl1-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 10 86C 10 83.7909 11.7909 82 14 82L 22 82L 22 90L 14 90C 11.7909 90 10 88.2091 10 86ZM 22 22L 14 22C 11.7909 22 10 23.7909 10 26L 10 86C 10 88.2091 11.7909 90 14 90L 22 90"></path></g></g></g><g id="g-root-cp_2_top-2_zqam231b8cg08-stroke" data-item-order="-286381" transform="translate(350, 86)"><g id="cp_2_top-2_zqam231b8cg08-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 274 28L 274 124M 10 124L 10 28M 274 28L 274 26C 274 17.1634 265.8485 10 255.7931 10L 28.2069 10C 18.1515 10 10 17.1634 10 26L 10 28"></path></g></g></g><g id="g-root-cp_2_Number_1_meu3or1b8chl6-stroke" data-item-order="-286374" transform="translate(338, 110)"><g id="cp_2_Number_1_meu3or1b8chl6-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 22 22L 82 22L 82 10L 112 52L 82 94L 82 82L 22 82"></path></g></g><g id="cp_2_Number_1_meu3or1b8chl6-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 10 86C 10 83.7909 11.7909 82 14 82L 22 82L 22 90L 14 90C 11.7909 90 10 88.2091 10 86ZM 22 22L 14 22C 11.7909 22 10 23.7909 10 26L 10 86C 10 88.2091 11.7909 90 14 90L 22 90"></path></g></g></g><g id="g-root-cp_3_top-3_4o6ka31b8cgsl-stroke" data-item-order="-286357" transform="translate(650, 86)"><g id="cp_3_top-3_4o6ka31b8cgsl-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 274 28L 274 124M 10 124L 10 28M 274 28L 274 26C 274 17.1634 265.8485 10 255.7931 10L 28.2069 10C 18.1515 10 10 17.1634 10 26L 10 28"></path></g></g></g><g id="g-root-cp_3_Number_2_1qdu3vv1b8ci6f-stroke" data-item-order="-286350" transform="translate(638, 110)"><g id="cp_3_Number_2_1qdu3vv1b8ci6f-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 22 22L 82 22L 82 10L 112 52L 82 94L 82 82L 22 82"></path></g></g><g id="cp_3_Number_2_1qdu3vv1b8ci6f-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 10 86C 10 83.7909 11.7909 82 14 82L 22 82L 22 90L 14 90C 11.7909 90 10 88.2091 10 86ZM 22 22L 14 22C 11.7909 22 10 23.7909 10 26L 10 86C 10 88.2091 11.7909 90 14 90L 22 90"></path></g></g></g><g id="g-root-cp_1_bottom-1_18n6kh71b8chdu-stroke" data-item-order="-286331" transform="translate(50, 200)"><g id="cp_1_bottom-1_18n6kh71b8chdu-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 274 10L 274 58M 10 58L 10 10M 274 58L 274 60C 274 68.8366 265.8485 76 255.7931 76L 28.2069 76C 18.1515 76 10 68.8366 10 60L 10 58"></path></g></g></g><g id="g-root-cp_2_bottom-2_zrjk8b1b8ci6k-stroke" data-item-order="-286321" transform="translate(350, 200)"><g id="cp_2_bottom-2_zrjk8b1b8ci6k-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 274 10L 274 58M 10 58L 10 10M 274 58L 274 60C 274 68.8366 265.8485 76 255.7931 76L 28.2069 76C 18.1515 76 10 68.8366 10 60L 10 58"></path></g></g></g><g id="g-root-cp_3_bottom-3_mgpiy31b8cglq-stroke" data-item-order="-286311" transform="translate(650, 200)"><g id="cp_3_bottom-3_mgpiy31b8cglq-stroke" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="4" stroke="#484848" stroke-width="2"><g><path d="M 274 10L 274 58M 10 58L 10 10M 274 58L 274 60C 274 68.8366 265.8485 76 255.7931 76L 28.2069 76C 18.1515 76 10 68.8366 10 60L 10 58"></path></g></g></g><g id="g-root-tx_1_zjfe3v1b8dvre-stroke" data-item-order="0" transform="translate(68, 140)"></g><g id="g-root-tx__1lpwfmz1b8dwjl-stroke" data-item-order="0" transform="translate(152, 131)"></g><g id="g-root-tx__m7yvqj1b8dxcb-stroke" data-item-order="0" transform="translate(452, 131)"></g><g id="g-root-tx_2_1umse231b8dx58-stroke" data-item-order="0" transform="translate(368, 140)"></g><g id="g-root-tx_3_qpnt4b1b8dvke-stroke" data-item-order="0" transform="translate(668, 140)"></g><g id="g-root-tx__1hbycrv1b8dvkd-stroke" data-item-order="0" transform="translate(752, 131)"></g><g id="g-root-tx__de7aqz1b8dx5b-stroke" data-item-order="0" transform="translate(110, 212)"></g><g id="g-root-tx__1uontbf1b8dw5k-stroke" data-item-order="0" transform="translate(380, 212)"></g><g id="g-root-tx__142d9nv1b8dw5l-stroke" data-item-order="0" transform="translate(704, 212)"></g></g></g></svg>
+
+- 首先，我让它们构想一下这个系统的总体架构方案。
+- 然后，我要求它们针对某个特定方面(比如客户身份识别)的机制进行更深入的阐述。
+- 最后，我让每个大语言模型回顾并评价一下自己给出的架构设计。
+
+而恰恰是这最后一个环节，大多数模型的回答都让我颇感意外。
+
+以下是我按特定顺序发出的提示词：
+
+**提示词一**
+```markdown
+你是一位经验丰富的软件架构师，任务是为一个现代化的加密货币交易平台设计完整的架构。该平台在规模和功能上应类似于 Coinbase 或 Kraken。你的设计方案必须详尽，并且需要同时考虑到技术和业务两方面的复杂性。
+```
+**提示词二**
+```markdown
+请绘制以下架构图，以呈现您刚才描述的服务生态系统：系统全局图 (System Landscape diagram)、和容器图 (Container diagram)。
+```
+**提示词三**
+```markdown
+我们来重点看看 KYC（客户身份验证）服务。这个服务有哪些架构方面的考量？你会如何设计它？请详细说明，一个负责为这个服务进行架构设计的人，需要在设计方案中涵盖哪些内容。不用涉及代码细节，但请列出构建此服务时所有技术和非技术层面的考量点。
+```
+**提示词四**
+```markdown
+请你扮演一家银行内部架构评审委员会的角色。审查你刚才提交的 KYC 架构方案，并指出其中存在的任何不足之处、潜在风险、缺失环节，以及需要进一步澄清或说明的普遍性问题。
+```
+**提示词五**
+```markdown
+如果用1到10分来评价（其中10分代表最高评价），你会给你刚才审查的这个KYC服务架构打几分？并请说明理由。
+```
+
+## 本次测评对象
+
+在这次的对比分析中，我主要考察了以下几位“选手”：
+
+- ChatGPT-4o
+- Claude 3.7 Sonnet
+- Gemini 2.0 Flash
+- Grok 3 (Beta)
+
+每个大语言模型（LLM）也都起了个专属昵称。这个昵称大致上是为了表明，它最像哪种类型的”架构师人设“。
+
+## 各就各位，预备，开始架构设计
+
+**提示词一**
+```markdown
+你是一位经验丰富的软件架构师，任务是为一个现代化的加密货币交易平台设计完整的架构。该平台在规模和功能上应类似于 Coinbase 或 Kraken。你的设计方案必须详尽，并且需要同时考虑到技术和业务两方面的复杂性。
+```
+目标： 
+> 探究不同的大型语言模型（LLM）会如何进行复杂系统的完整端到端架构设计，涵盖其组件构成、分层逻辑、服务划分以及宏观战略层面。
+
+### ✨ ChatGPT：企业级解决方案架构师 —— 行文老练，高屋建瓴，略显行话。
+
+![](/assets/276b125c-f96f-4dff-b903-a44b5f87b570.jpg)
+
+#### 总体感受
+
+ChatGPT 给出的架构方案该架构方案借鉴了主流交易所（如Coinbase/Kraken）的成熟理念，在分层解耦、高性能、高安全、可扩展、易运维等方面表现突出，适合支撑企业级、国际化加密货币交易平台的长期演进和快速创新。
+
+不足之处在于，在安全细节、高可用、分布式治理、合规、监控与API安全等企业级核心要素的具体实现与精细化能力上存在明显不足。
+
+举个例子，它仅有通用监控，未对“撮合延迟”、“大额资金流动”等核心业务指标做专门跟踪。出现异常无法第一时间定位到问题点。
+
+#### 优点
+
+- 它所采用的方法展现了高度的模块化特性。
+- 其高层架构设计简洁明了，且经过了良好打磨。
+- 提及了多种主流架构模式（例如微服务、事件驱动架构、容器化与DevOps），但并未详细阐述在当前场景下选择它们的原因。
+- 对一些关键的非功能性需求（如安全性、合规性、可观测性等）有所覆盖。
+- 在某些场景下，提及了具体的技术选型、相关的合规标准以及潜在的第三方服务或供应商。
+- 能主动给出全局架构图
+
+#### 不足之处
+- 方案显得过于理想化： 缺乏对如何分阶段实施、如何支持架构演进等方面的考量；同时，很多设计决策（例如技术栈的选择）也未给出充分的理由。
+- 在具体实施的现实性考量方面着墨不多，略显“纸上谈兵”。感觉在某些方面本应进行更深层次的探讨。
+- 并未提及在架构设计中常见的权衡取舍（trade-offs）。
+- 存在一些未明说的隐含假设，并且使用了一些的主流技术术语，但并没有清晰阐述为何做出这样或那样的架构选择。
+
+#### 适用场景
+
+<div class="flex gap-4">
+<div class="block max-w-sm p-6 bg-blue-50 rounded-lg shadow-sm hover:bg-blue-100 dark:bg-blue-800  dark:hover:bg-blue-700">
+  <h5 class="mb-2 text-xl font-bold tracking-tight text-orange-500 dark:text-white">作为大型规划的初步参考框架</h5>
+  <div class="font-normal text-sm text-gray-700 leading-loose dark:text-gray-400">
+  在那些合规性要求非常严格的机构（比如金融、医疗等受监管行业），当需要向各方决策者（stakeholders）展示一个用于大规模规划的参考架构时，ChatGPT 的架构方案可以作为一个不错的初版参照框架。
+  即便如此，后续仍然需要对其中的每一个细节进行大量的深入研究和推敲，并且要仔细考量架构中每一个组成部分背后的设计初衷及其可能带来的具体影响。
+  </div>
+</div>
+<div class="block max-w-sm p-6 bg-blue-50 leading-loose  rounded-lg shadow-sm hover:bg-blue-100 dark:bg-blue-800  dark:hover:bg-blue-700">
+  <h5 class="mb-2 text-xl font-bold tracking-tight text-orange-500 dark:text-white">作为理解复杂概念的入门蓝图</h5>
+  <div class="font-normal text-sm text-gray-700 leading-loose dark:text-gray-400">
+  可以将它视为一个初步的设计蓝图或草稿。尤其对于刚开始接触一个复杂系统、需要快速建立整体概念的人来说，它可以作为一个很好的起点，帮助你迅速“盘清楚”项目初期可能会涉及到的一些核心概念和主要构成部分。
+  </div>
+</div>
+</div>
+
+### ✨Claude：化身“咨询顾问” — 攻克“需求建议书 (RFP)”
+![](/assets/925a0123-1a7e-4fcb-83b4-2b361fe765ea.png)
+
+#### 总体感受
+
+它的输出内容读起来很像是针对一份需求文档（特别是像“需求建议书 RFP”这类文件）所做的回应。与前面提到的 ChatGPT 有些相似，它也是蜻蜓点水般地覆盖了各个方面，但缺乏应有的深度，也没有提出什么鲜明有力的观点。
+
+整个方案看不出明确的优先级划分，也缺少具体的技术实施步骤和先后顺序。虽然用列表形式列出了一份内容宽泛的服务清单，但相关的叙述性说明却非常有限。它比较侧重于罗列各个组件的名称，但这些组件之间深层次的关联和协同机制并没有得到很好的阐释。
+
+总的来说，这份输出给人的感觉更像是一份用于内部沟通，或者是与供应商之间进行需求初步对齐的备忘录或草案，而非一份经过深思熟虑、可以直接采纳的解决方案。
+
+#### 优点
+- 基本上涵盖了所有主要的、不可或缺的架构系统组成部分。
+- 同时兼顾了业务需求和技术实现两个层面。
+- 内容覆盖广泛且相对“稳妥”——从清单层面来看，基本没有什么重大遗漏。
+
+#### 不足之处
+- 整体感觉比较泛泛，像是一套“样板式”的回复，缺乏个性化和针对性。
+- 在实施步骤的先后顺序、不同方案间的权衡取舍（trade-offs），以及如何深入剖析架构特性等方面，未能提供明确的指导。
+- 几乎看不到批判性思考的痕迹，也缺乏把架构设计思路和缘由清晰呈现出来的“架构叙事”。
+- 甚至比 ChatGPT 的输出显得更为笼统，方案中虽然提及了一些具体技术，但却很少涉及到相关的合规性标准。
+
+#### 适用场景
+
+用于组织内部，或者在与外部供应商沟通时，进行初步的需求梳理和认知对齐（initial requirements alignment）。
+
+具体来说，就是当你的主要目标是快速生成一份涵盖范围非常广泛、但暂时不深入探讨具体细节的待办事项或议题清单时，这种输出会比较有用。它能帮助大家先把所有可能相关的点都摆在桌面上，作为后续深入讨论的基础。
+
+### ✨ Gemini：“技术产品负责人”角色 — 迅速捕捉灵感，将最初构思付诸笔端
+
+![](/assets/0_q_Gxg8dMVURC_RHq.webp)
+
+#### 总体感受
+
+它的输出风格与前面我们看到的 Claude 和 ChatGPT 非常相似，但给人的感觉甚至还要更粗略一些，也更偏重于宏观层面（high level）。
+
+在目前评估的这三个大语言模型中，Gemini 的方案给人的感觉像是最全局、最“顶层”的一个概览。然而与此同时，有些出人意料的是，当涉及到具体会用到哪些技术时，它的阐述又显得是三者中最为明确和具体的。
+
+只不过，方案中并没有提及推荐这些特定技术的具体原因或背后考量。
+
+#### 优点
+- 内容简练，直击要点。
+- 它倾向于将大部分信息都组织在各个特定的功能领域之下，这种做法可能比将技术选型或其他考量因素拆分到独立章节更容易让人理解和跟进。
+
+#### 不足之处
+- 内容显得比较“密集”且缺乏打磨，读起来更像是一份内部文档的初步大纲，而非对外展示的成熟方案。
+- 几乎没有采用什么视觉化的结构来组织内容，图表也非常少。
+- 即便是用于最初与项目干系人沟通的会议，其提供的细节也远远不够。
+
+#### 适用场景
+
+供技术产品负责人或 解决方案架构师用作创建一份全局架构文档时的初步大纲或草稿蓝图。
+
+### ✨ Grok：“软件架构师” — 追求“全覆盖”，力求面面俱到
+![](/assets/0_HlCvH50Q_kVQ6nM4.webp)
+
+#### 总体感受
+
+这份输出给人的感觉，像是一个项目非常扎实的起点。一方面，它具备了足够的通用性；另一方面，它也确实深入到了一定的细节层面，并且就“当一个团队开始着手构建一个加密货币交易所时，需要重点考虑哪些方面”这个问题，给出了一个相当全面且稳健的宏观视角。
+
+它对所有关键议题——例如功能性需求、非功能性需求（也就是我们常说的架构特性）、潜在风险等等——都进行了清晰的章节划分和阐述，条理分明。
+
+更值得一提的是，在目前看过的所有版本中，这是唯一一个明确提及了项目中可能存在的风险（risks）和后续运营层面需要关注的问题（operational concerns），并且清晰地指出了非功能性需求（non-functional requirements）重要性的方案。
+
+#### 优点
+
+- 在合规性、隐私保护、审计以及为满足监管要求所做的准备方面，表现得尤为出色。
+- 对潜在风险和运营层面的考量也给出了明确且有价值的提示。
+- 各个章节的划分清晰，并且其组织顺序也基本符合真实项目中处理相关议题的典型逻辑。
+- 整体而言，感觉比其他几个方案要更全面、更详尽。
+
+#### 不足之处 (Weaknesses)
+
+- 对于缺乏强大架构领导力（strong architecture leadership）的团队而言，可能会感到内容过于庞杂，难以消化和跟进。
+- 在架构选型上预设了一些结论（例如采用微服务、事件驱动架构），但并未阐述选择这些方案的理由，也没有提及其他可替代方案。
+
+#### 适合场景：
+
+对于那些刚刚开始构思如何构建这类复杂系统的团队，这份输出会非常有帮助。
+
+具体来说，它可以帮助团队思考以下几个方面：
+- 如何着手准备初步的架构设计文档。
+- 如何对整个项目进行有效的拆解（即分解成更小、更易于管理和执行的模块或任务）。
+- 以及在整个构建过程中，有哪些关键的因素和要点是必须认真考虑的。
+总而言之，它提供了一个既有宏观视角、又不失必要细节的描述，其详细程度足以**成为一个真正可以据此着手推进工作的实际起点**。
+
+## 架构图绘制
+目前上述四个大语言模型的输出，都包含了基于mermardjs语法绘制的相关架构图，但输出角度不同，所以我们需要根据我们的需求来进行相关的架构图绘制。
+
+**提示词二**
+```markdown
+请使用 C4 表示法绘制以下架构图，以呈现您刚才描述的服务生态系统：系统全局图 (System Landscape diagram)和容器图 (Container diagram)。
+```
+本次评估的主要目的在于，考察这些大语言模型（LLM）是否能够有效地将其脑海中的构思和逻辑进行可视化梳理，并能否通过创建真正有用且清晰的架构图，来展现它们进行系统级分析和整体方案构建的能力。
+
+### ✨ ChatGPT
+这些架构图本身画得相当清晰，同时每张图也都辅以了相应的文字描述。
+
+系统全局图 (System Landscape Diagram)
+![](/assets/Editor___Mermaid_Chart-2025-05-09-160227.png)
+![](/assets/Juchats-Mermaid-1746931488761.png)
+容器图 (Container Diagram):
+![](/assets/Juchats-Mermaid-1746932417624.png)
+
+### ✨ Claude
+它所生成的示意图能够精准地以可视化方式呈现各个服务（或系统组件）；同时，每一份图表也都附有详尽的文字描述，清晰解释了该图所要表达的核心信息与含义。
+
+系统全局图 (System Landscape Diagram)
+![](/assets/Editor___Mermaid_Chart-2025-05-09-155757.png)
+![](/assets/Juchats-Mermaid-1746933799068.png)
+容器图 (Container Diagram):
+![](/assets/Juchats-Mermaid-1746933999061.png)
+
+### ✨ Gemini
+
+系统全局图 (System Landscape Diagram)
+![](/assets/Editor___Mermaid_Chart-2025-05-09-152101.png)
+
+### ✨ Grok
+它生成的示意图简洁规整且内容准确，并且图中不同元素之间的关联关系也都明确标注了名称。
+
+系统全局图 (System Landscape Diagram)
+![](/assets/Editor___Mermaid_Chart-2025-05-09-154808.png)
+
+## KYC 服务架构设计
+**提示词三**
+```markdown
+我们来重点看看 KYC（客户身份验证）服务。这个服务有哪些架构方面的考量？你会如何设计它？请详细说明，一个负责为这个服务进行架构设计的人，需要在设计方案中涵盖哪些内容。不用涉及代码细节，但请列出构建此服务时所有技术和非技术层面的考量点。
+```
+目标：在评估各大语言模型（LLM）在理解和分析系统中某个特定且复杂的关键组件时所能达到的深度，特别是那些涉及大量合规性和监管要求的组件。
+
+### ✨ ChatGPT
+- 对于KYC 服务及其负责的关键领域，给出了一个扎实且全面的概述。
+- 提出了一些关键的架构考量因素，不过这些内容与功能性需求有所交织，未能完全分开阐述。
+- 简要提及了领域数据模型，甚至还勾勒出了一个基础的数据库表设计。
+- 提及了与第三方系统的集成、系统的可观测性、合规性要求以及相关的法律法规。
+- 开始对 API 设计进行较深入的探讨，并勾勒出了一个基础的 C4 容器图（C4 container diagram）的框架。
+- 最后以一份检查清单（checklist）的形式进行了总结，并提及了构建与运营此服务所涉及的关键角色。但是，方案中并未提及灾难恢复（disaster recovery）或业务连续性方面的内容。
+
+### ✨ Claude
+- 它将功能性需求与非功能性需求进行了明确区分，这使得各项要求之间的界限更为清晰。
+- 针对主要的“了解你的客户”（KYC）服务，它还勾勒出了其内部包含的各个子服务。
+- 提及了不同的集成模式、部署架构方案以及相关的安全考量因素。
+- 明确指出了需要关注的相关法规以及灾难恢复（disaster recovery）方面的事项。
+- 提及了成本考量，并将成本细分为开发成本、运营成本和扩展成本等不同类别，这一点非常有帮助。
+
+### ✨ Gemini
+- 对于技术层面和非技术层面的各种考量因素，提供了一个非常概括性的总览。
+- 虽然提及了成本因素，但并未进行详细的阐述。
+- 对于架构特性及相关的考量因素，给出了一个比较扎实和全面的概述。
+- 完全没有提供代码或数据库模式（schema）设计的具体细节，也缺少任何形式的图表——一张都没有。
+
+### ✨ Grok
+- 对 KYC（客户身份验证）进行了最全面的架构深度剖析，并将其细分为多个服务（例如：生物识别、反洗钱AML、光学字符识别OCR、风险评分、案件管理）。
+- 该设计方案涵盖了数据生命周期、监控、部署和监管要求等方面。
+- 深入到了事件模式（event schemas）和数据库表设计的细节。
+- 明确指出了存在的风险以及需要进一步阐述的要点。
+
+## 自我反省能力
+**提示词四 + 提示词五**
+```markdown
+请你扮演一家银行内部架构评审委员会的角色。审查你刚才提交的 KYC 架构方案，并指出其中存在的任何不足之处、潜在风险、缺失环节，以及需要进一步澄清或说明的普遍性问题。
+
+如果用1到10分来评价（其中10分代表最高评价），你会给你刚才审查的这个KYC服务架构打几分？并请说明理由。
+```
+目标：测试大型语言模型（LLM）对其自身输出进行批判性思考、识别不足之处，并模拟一次治理层面（或企业级）架构评审的能力。
+
+### ✨ ChatGPT
+
+指出了若干不足之处与风险，包括：
+
+- 未提及该数据的可信数据源系统（Source of Truth）。
+- 未具体说明如何应对 GDPR 及其他相关法规的要求。
+- 缺乏灾难恢复计划，且未设定 RTO（恢复时间目标）和 RPO（恢复点目标）。
+- 对可审计性提及不足，尤其是在涉及人工工作流流程时。
+- 未提及使用第三方服务所带来的风险。
+- 测试方法/策略方面存在不足。
+
+最后，还提供了额外的建议。
+评分：ChatGPT 对自身（的输出）评分为7.5分（满分10分）。
+
+以下是 ChatGPT 对其自身架构的说明：
+
+> KYC 服务的架构在概念上很强大，对于一个现代化、快速发展的加密货币平台来说结构也很好——但在解决关键的合规、运营和安全差距之前，它尚未成熟到足以应用于银行级环境。
+该架构采用了大多数正确的技术和功能模式，特别是对于一个技术前沿、加密货币原生且致力于优化上市时间和模块化的产品而言。
+然而，从金融机构的角度来看——对于金融机构而言，KYC 不仅仅是一项合规职能，更是一项法律义务、审计风险和声誉保障——该架构在以下方面存在不足之处：
+
+### ✨ Claude
+- 它清晰地将存在的差距或风险划分为了几大类：技术层面、合规层面和运营层面。同时，也点出了其中一些最为关键的不足之处。
+- 值得一提的是，它还提到了在人员培训和专业技能方面可能存在的不足——这一点至关重要，却常常被忽视。
+- 明确指出了哪些方面还需要进一步的澄清。
+- 方案中也包含了一些改进建议。
+- 总的来说，这份（自我）评审非常简短扼要，但未深入过多细节。
+
+评分：克劳德给自己的方案打了 7 分（满分 10 分）。
+
+Claude 对其自身架构的评价如下：
+
+> 这个架构方案本身提供了一个坚实的基础，但在投入实际应用之前，指出的那些不足之处都需要得到解决。尤其需要考虑到，加密货币交易所的‘了解你的客户’（KYC）流程通常伴随着高度的监管审查和显著的金融风险。
+一个良好（7分水平）的KYC系统与一个卓越（9-10分水平）的系统之间的差异，往往就体现在那些能够确保合规性、卓越运营以及强效欺诈防范的细节处理上。
+
+### ✨ Gemini
+Gemini的评估针对存在的差距和缺失环节，给出了一份相当详尽的审视报告，其中包括：
+
+- 数据驻留地和保留策略
+- 用户同意管理机制
+- 边缘案例的处理方式
+- KYC（了解你的客户）工作流程中的人工审核环节
+- 缺乏明确的可审计性追踪
+- 服务级别协议
+- 灾难恢复与业务连续性计划
+- 数据的训练与质量保障——这一点极为重要却常常被忽视
+- 数据风险、合规风险以及第三方风险
+- 不断演变的监管法规
+- 各个组成部分权责归属不明确的问题
+
+感觉上，大多数关键的差距和风险点都已被提及，并且得到了足够清晰的解释，团队可以直接着手处理这些问题。Gemini 还给出了一个总体的评估摘要和一些详尽的改进建议。
+
+评分：Gemini 给自己的方案打了 6 分（满分 10 分）。
+
+Gemini 对其自身架构的评价如下：
+
+> 总的来说，最初的这份提案展现出对 KYC 服务所需的基本组成部分和核心考量因素有不错的理解。然而，它在深度和具体性方面仍有欠缺，尚不足以让我们有信心将其认可为一个适用于受监管金融机构的、稳健且达到生产就绪标准的架构。
+> 它提供了一个坚实的基础（因此给了6分），但还需要进行大量细致的工作来充实具体细节，解决已发现的差距和风险，并在安全性、合规性、可靠性和运营效率方面提供必要水平的保障。我们需要一份远比现在更为详尽的蓝图，才有可能将其视为一个更高评分的架构方案。
+
+### ✨ Grok
+与其他大语言模型（LLM）相比，Grok 的自我审视（self-review）要详尽得多。
+
+其他大语言模型通常只提供一个比较笼统的框架，Grok 则不同，它针对自己发现的每一个具体差距和风险点都进行了更深层次的剖析，并给出了相应的行动建议（course of action）。它详细分析了给出如此自我评分的具体原因。它是唯一一个不仅给出评分，还具体解释了为何是这个确切分数——不高也不低——的大语言模型。此外，它还概述了一份改进计划。
+
+评分：Grok 给自己的方案打了 6 分（满分 10 分）。
+
+Grok 对其自身架构的评价如下：
+
+> 这份KYC服务架构之所以获得 6/10 的评分，主要得益于其坚实的技术基础、对监管要求的认知以及以用户为中心的设计特点。然而，它在合规细节的完善程度、运营成熟度、安全性的稳健水平以及第三方依赖关系管理等方面存在的显著差距，使其难以获得更高评分。
+在银行业这样的应用背景下，监管审查极为严格，安全要求也至高无上，因此这些不足之处就显得尤为关键。
+通过解决这些已明确指出的问题，该架构方案能够逐步演进为一个稳健且合规的解决方案，从而适用于在银行监管体系下运营的加密货币交易所。
+
+
+| LLM     | 优势               | 劣势        | 最佳适用      | 自我评审 |
+| :------ | :----------------------------- | :----------------------- | :----------------------- | :----------------- |
+| ChatGPT | 精炼，模块化，可供利益相关者审阅     | 通用，缺乏权衡             | 初始参考架构             | 7.5/10             |
+| Claude  | 安全地覆盖广度                  | 模板化，缺乏叙事性          | 需求收集                 | 7/10               |
+| Gemini  | 简洁，结构化，适用于早期草稿        | 粗略，非生产就绪           | 初始概念稿               | 6/10               |
+| Grok    | 深入，风险与项目就绪             | 对初级团队而言过于复杂       | 项目规划和风险分析        | 6/10               |
+
+
+## 结论 — 这一切究竟意味着什么？
+
+在我们得出我的结论之前，重要的一点是，需要强调对这个结论应持保留态度（take with a grain of salt）。毋庸置疑，我的分析、结果以及解读都是主观且有所偏颇的。
+
+这里有许多因素在起作用，并且由于大型语言模型（LLM）处理和输出的非确定性，即便你遵循了与我完全相同的提示，也可能得到不同的结果。
+
+此外，LLM 还在不断地进行微调和重新训练。它们在进化。因此，它们今天提供给我的答案，可能与三个月后提供的答案大相径庭。
+
+尽管如此——我即将得出的结论，仍然感觉像是对事物真实状态的一种反映——至少在目前是这样。
+
+虽然我进行的分析极其有限，但它确实在某种程度上反映了如果一个人没有任何架构经验，他可能会经历的过程。
+
+此外，在我的分析中，我提出了一些问题，如果我没有今天所拥有的经验，我根本不知道该问这些问题。
+
+正如每一位经验丰富的软件工程师和架构师所知，从零开始构建一个系统，既是一门艺术，也是一门科学。
+
+老实说？有时候，它更像是一门艺术。
+
+构建这样一个系统需要考虑的细微差别是巨大的。其复杂程度几乎让人难以承受。是的，非常复杂。想要通过一两次、甚至三两次的尝试就完全掌握，几乎是不可能的。
+
+你构建这样一个系统——实际上是任何系统——的方式，都是通过一个兼具结构化与非结构化的发现、调研、演进和实验的过程。如果你不具备架构经验，或者不知道如何以架构的方式思考——你就不知道该问哪些问题。
+
+你可能会问第一个问题。比如——“我如何构建 XYZ 系统？” 无论是作为产品负责人、业务分析师、工程副总裁、业务利益相关者，还是软件工程师。
+
+然而，知道下一步该何去何从则是个挑战。
+
+事实上，我敢打赌，如果你也做过类似的练习——向你最喜欢的 LLM 咨询系统设计——你可能根本想不到问它那个非常简单——却极其有力的问题：
+
+“你自己的架构中存在哪些不足？”
+
+这才是关键所在。软件架构以及成为一名软件架构师，与其说是知道所有答案，不如说是知道该问什么问题，何时问，以及为什么问。
+
+考虑到这一点，进行这个实验给了我两个清晰的印象：
+
+📍 总的来说，LLM 产生相似的结果，这并不令人意外。我预料到内容会非常宏观。我没指望看到太多关于权衡取舍的讨论，也没期望在可扩展性、弹性和可观察性之外对架构特性进行深入探讨。
+
+📍 真正让我惊讶的是 Grok 的表现。它更加细致，更具自我批判精神，并且探索了其他模型未必触及但本应探索的领域。它并非完美，远非如此，但它展现了更深的思考深度、更强的自我意识，以及对现实世界系统设计中那些混乱现实的更多探索。
+
+即便是它的自我批评——给自己打了 6 分（满分 10 分）——也是一个积极的信号。能够批判自己的设计工作，这一点即使是许多经验丰富的架构师也难以做到。
+
+在所有 LLM 中，Grok 脱颖而出。
+
+那么，这对我们意味着什么呢？
+
+至少目前来看，生成式AI（GenAI）短期内不会取代架构师。这是我的看法。欢迎提出不同意见。架构并非为业务利益相关者创建图表或演示文稿的能力，而是图表背后所蕴含的批判性、反思性和迭代性思维能力。这在很大程度上仍然是一项人类技能。
+
+然而，关键在于，未来属于那些拥抱变革、积极适应的人。
+
+软件架构师不会被人工智能取代。
+
+但他们会被那些比任何人都更懂得如何使用人工智能的架构师所取代。
